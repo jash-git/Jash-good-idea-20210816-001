@@ -1,0 +1,31 @@
+OpenCV4 C/C++基礎代碼
+
+列表:
+01 環境搭建
+02 顯示圖像 [建立QuickDemo CLASS]
+03 圖像對象的創建與賦值 [怎麼操作/存取Mat]
+04 圖像像素的讀寫操作
+05 圖像像素的操作
+06 滾動條演示操作-調整圖片亮度
+07 滾動條演示操作-圖片資料傳遞參數
+08 鍵盤響應操作
+09 opencv自帶顏色操作 - 將圖片轉換成不同格式輸出至畫面上 [COLORMAP_AUTUMN ,COLORMAP_BONE,COLORMAP_CIVIDIS,COLORMAP_DEEPGREEN,COLORMAP_HOT,COLORMAP_HSV,COLORMAP_INFERNO,COLORMAP_JET,COLORMAP_MAGMA,COLORMAP_OCEAN,COLORMAP_PINK,COLORMAP_PARULA,COLORMAP_RAINBOW,COLORMAP_SPRING,COLORMAP_TWILIGHT,COLORMAP_TURBO,COLORMAP_TWILIGHT,COLORMAP_VIRIDIS,COLORMAP_TWILIGHT_SHIFTED,COLORMAP_WINTER]      
+10 圖像像素的邏輯操作
+11 通道的分離與合併 - [R G B] split(image, mv); merge(mv, dst);
+12 圖像色彩空間轉換 - 35,43,46根据图片中绿色最低来确定最小值 77,255,255 提取 将hsv中的由低到高的像素点提取出来并且存储到mask当中 [RGB HSV 影像處理 顏色 識別 / 辨別 / 判讀 / 辨識]
+13 圖像像素值統計 - 分别打印各个通道的数值 求出图像的最大值和最小值 求出图像的均值和方差
+14 圖像幾何形狀的繪製
+15 隨機數與隨機顏色(繪圖/畫圖)
+16 多邊形填充與繪製(繪圖/畫圖)
+17 鼠標(滑鼠)操作與響應/事件
+18 圖像像素類型的轉換與歸一化
+19 圖像的放縮(縮小/放大/縮放)與插值
+20 圖像的翻轉
+21 圖像(圖片/影像/圖像)的旋轉
+22 視頻文件攝像頭(CCD)使用
+23 視頻(影片/mp4)處理與保存
+25 直方圖的均衡化
+26 圖像的捲積(圖像卷積)操作
+27 高斯模糊
+28 高斯雙邊模糊
+29 實時視頻人臉檢測
