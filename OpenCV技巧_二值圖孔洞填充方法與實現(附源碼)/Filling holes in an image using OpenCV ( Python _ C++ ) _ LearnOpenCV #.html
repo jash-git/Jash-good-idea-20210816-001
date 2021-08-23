@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/ -->
+<html lang="en-US" prefix="og: https://ogp.me/ns#" class="js" style="min-height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/analytics.js.下載"></script><script src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/193036094536652" async=""></script><script async="" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/fbevents.js.下載"></script><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript;n||console.error("WPRocket unable to document.write this: "+t);const i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filling holes in an image using OpenCV ( Python / C++ ) | LearnOpenCV #</title><link rel="stylesheet" href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/css"><link rel="stylesheet" href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/20531d322ca20e9ebcb69f2f81bce812.css" media="all" data-minify="1">
+
+		<!-- All in One SEO Pro 4.1.3.3 -->
+		<meta name="description" content="This tutorial describes a method for filling holes in a binary image in OpenCV ( C++ / Python ). The method is similar to imfill in MATLAB.">
+		<meta name="keywords" content="holes,imfill">
+		<link rel="canonical" href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/">
+		<meta property="og:site_name" content="LearnOpenCV – OpenCV, PyTorch, Keras, Tensorflow examples and tutorials">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="Filling holes in an image using OpenCV ( Python / C++ ) | LearnOpenCV #">
+		<meta property="og:description" content="This tutorial describes a method for filling holes in a binary image in OpenCV ( C++ / Python ). The method is similar to imfill in MATLAB.">
+		<meta property="og:url" content="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/">
+		<meta property="og:image" content="https://learnopencv.com/wp-content/uploads/2017/12/favicon.png">
+		<meta property="og:image:secure_url" content="https://learnopencv.com/wp-content/uploads/2017/12/favicon.png">
+		<meta property="og:image:width" content="32">
+		<meta property="og:image:height" content="32">
+		<meta property="article:published_time" content="2015-11-23T15:37:58Z">
+		<meta property="article:modified_time" content="2021-05-05T18:42:12Z">
+		<meta property="article:publisher" content="https://www.facebook.com/Learnopencv-277284889389059">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:site" content="@AiOpencv">
+		<meta name="twitter:domain" content="learnopencv.com">
+		<meta name="twitter:title" content="Filling holes in an image using OpenCV ( Python / C++ ) | LearnOpenCV #">
+		<meta name="twitter:description" content="This tutorial describes a method for filling holes in a binary image in OpenCV ( C++ / Python ). The method is similar to imfill in MATLAB.">
+		<meta name="twitter:image" content="https://learnopencv.com/wp-content/uploads/2017/12/favicon.png">
+		<meta name="google" content="nositelinkssearchbox">
+		<script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebSite","@id":"https:\/\/learnopencv.com\/#website","url":"https:\/\/learnopencv.com\/","name":"LearnOpenCV","description":"OpenCV, PyTorch, Keras, Tensorflow examples and tutorials","publisher":{"@id":"https:\/\/learnopencv.com\/#organization"}},{"@type":"Organization","@id":"https:\/\/learnopencv.com\/#organization","name":"LearnOpenCV","url":"https:\/\/learnopencv.com\/","logo":{"@type":"ImageObject","@id":"https:\/\/learnopencv.com\/#organizationLogo","url":"https:\/\/learnopencv.com\/wp-content\/uploads\/2017\/12\/favicon-128x128.png","width":"128","height":"128"},"image":{"@id":"https:\/\/learnopencv.com\/#organizationLogo"},"sameAs":["https:\/\/www.facebook.com\/Learnopencv-277284889389059","https:\/\/twitter.com\/AiOpencv","https:\/\/www.instagram.com\/learnopencv\/","https:\/\/www.linkedin.com\/in\/satyamallick\/"]},{"@type":"BreadcrumbList","@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/learnopencv.com\/#listItem","position":"1","item":{"@type":"WebPage","@id":"https:\/\/learnopencv.com\/","name":"Home","description":"Learn computer vision, machine learning, and artificial intelligence with OpenCV, PyTorch, Keras, and Tensorflow examples and tutorials","url":"https:\/\/learnopencv.com\/"},"nextItem":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#listItem"},{"@type":"ListItem","@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#listItem","position":"2","item":{"@type":"WebPage","@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/","name":"Filling holes in an image using OpenCV ( Python \/ C++ )","description":"This tutorial describes a method for filling holes in a binary image in OpenCV ( C++ \/ Python ). The method is similar to imfill in MATLAB.","url":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/"},"previousItem":"https:\/\/learnopencv.com\/#listItem"}]},{"@type":"Person","@id":"https:\/\/learnopencv.com\/author\/spmallick\/#author","url":"https:\/\/learnopencv.com\/author\/spmallick\/","name":"Satya Mallick","image":{"@type":"ImageObject","@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#authorImage","url":"https:\/\/secure.gravatar.com\/avatar\/708995cd13fb5756f6bc418aecb23b78?s=96&d=mm&r=g","width":"96","height":"96","caption":"Satya Mallick"},"sameAs":["https:\/\/www.facebook.com\/Learnopencv-277284889389059","https:\/\/twitter.com\/AiOpencv","https:\/\/www.instagram.com\/learnopencv\/","https:\/\/www.linkedin.com\/in\/satyamallick\/"]},{"@type":"WebPage","@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#webpage","url":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/","name":"Filling holes in an image using OpenCV ( Python \/ C++ ) | LearnOpenCV #","description":"This tutorial describes a method for filling holes in a binary image in OpenCV ( C++ \/ Python ). The method is similar to imfill in MATLAB.","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/learnopencv.com\/#website"},"breadcrumb":{"@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#breadcrumblist"},"author":"https:\/\/learnopencv.com\/author\/spmallick\/#author","creator":"https:\/\/learnopencv.com\/author\/spmallick\/#author","image":{"@type":"ImageObject","@id":"https:\/\/learnopencv.com\/#mainImage","url":"https:\/\/learnopencv.com\/wp-content\/uploads\/2015\/11\/imfill.jpg","width":"900","height":"295"},"primaryImageOfPage":{"@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#mainImage"},"datePublished":"2015-11-23T15:37:58-08:00","dateModified":"2021-05-05T18:42:12-07:00"},{"@type":"Article","@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#article","name":"Filling holes in an image using OpenCV ( Python \/ C++ ) | LearnOpenCV #","description":"This tutorial describes a method for filling holes in a binary image in OpenCV ( C++ \/ Python ). The method is similar to imfill in MATLAB.","headline":"Filling holes in an image using OpenCV ( Python \/ C++ )","author":{"@id":"https:\/\/learnopencv.com\/author\/spmallick\/#author"},"publisher":{"@id":"https:\/\/learnopencv.com\/#organization"},"datePublished":"2015-11-23T15:37:58-08:00","dateModified":"2021-05-05T18:42:12-07:00","commentCount":"10","articleSection":"how-to, holes, imfill, spmallick","mainEntityOfPage":{"@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#webpage"},"isPartOf":{"@id":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/#webpage"},"image":{"@type":"ImageObject","@id":"https:\/\/learnopencv.com\/#articleImage","url":"https:\/\/learnopencv.com\/wp-content\/uploads\/2015\/11\/imfill.jpg","width":"900","height":"295"}}]}
+		</script>
+		<!-- All in One SEO Pro -->
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link href="https://fonts.gstatic.com/" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="LearnOpenCV » Feed" href="https://learnopencv.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="LearnOpenCV » Comments Feed" href="https://learnopencv.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="LearnOpenCV » Filling holes in an image using OpenCV ( Python / C++ ) Comments Feed" href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/feed/">
+		<!-- This site uses the Google Analytics by MonsterInsights plugin v7.18.0 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+		<!-- Note: MonsterInsights is not currently configured on this site. The site owner needs to authenticate with Google Analytics in the MonsterInsights settings panel. -->
+					<!-- No UA code set -->
+				<!-- / Google Analytics by MonsterInsights -->
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+
+
+<style id="dcl-front-style-dummy-inline-css" type="text/css">
+#dcl_btn_container{text-align: center;margin-top:10px;margin-bottom:10px}
+</style>
+
+
+
+
+
+
+
+
+<style id="elementor-frontend-inline-css" type="text/css">
+@font-face{font-family:eicons;src:url(https://learnopencv.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0);src:url(https://learnopencv.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0#iefix) format("embedded-opentype"),url(https://learnopencv.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff2?5.10.0) format("woff2"),url(https://learnopencv.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff?5.10.0) format("woff"),url(https://learnopencv.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.ttf?5.10.0) format("truetype"),url(https://learnopencv.com/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.svg?5.10.0#eicon) format("svg");font-weight:400;font-style:normal}
+[class^="eicon"], [class*=" eicon-"] { font-family: "initial"; } [class^="eicon"]:before, [class*=" eicon-"]:before { content: ""; }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="rocket-lazyload-inline-css" type="text/css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;cursor:pointer;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:72px;width:72px;left:50%;top:50%;margin-left:-36px;margin-top:-36px;position:absolute;background:url(https://learnopencv.com/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat;cursor:pointer}
+</style>
+
+
+
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.min.js.下載" id="jquery-core-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery-migrate.min.js.下載" id="jquery-migrate-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jq-sticky-anything.min.js.下載" id="stickyAnythingLib-js" defer=""></script>
+<script type="text/javascript" id="topbar_frontjs-js-extra">
+/* <![CDATA[ */
+var tpbr_settings = {"fixed":"notfixed","user_who":"notloggedin","guests_or_users":"all","message":"30% OFF Course Sale - Nov 27 ONLY!","status":"inactive","yn_button":"button","color":"#cec027","button_text":"Subscribe Now","button_url":"https:\/\/bigvisionllc.lpages.co\/learnopencv-black-friday-2020\/","button_behavior":"samewindow","is_admin_bar":"no","detect_sticky":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/tpbr_front.min.js.下載" id="topbar_frontjs-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/flatpickr.min.js.下載" id="ppress-flatpickr-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/select2.min.js.下載" id="ppress-select2-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/global.js.下載" id="epik-global-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/v4-shims.min.js.下載" id="font-awesome-4-shim-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/wp-quicklatex-frontend.js.下載" id="wp-quicklatex-frontend-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://learnopencv.com/wp-json/"><link rel="alternate" type="application/json" href="https://learnopencv.com/wp-json/wp/v2/posts/1618"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://learnopencv.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://learnopencv.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.7.2">
+<link rel="shortlink" href="https://learnopencv.com/?p=1618">
+<link rel="alternate" type="application/json+oembed" href="https://learnopencv.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Flearnopencv.com%2Ffilling-holes-in-an-image-using-opencv-python-c%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://learnopencv.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Flearnopencv.com%2Ffilling-holes-in-an-image-using-opencv-python-c%2F&amp;format=xml">
+<style>
+@media only screen and (max-width: 800px) {
+	#menu-top-bar {
+		display: none;
+	}
+}
+</style>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async="" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-50426860-2');
+</script><link rel="pingback" href="https://learnopencv.com/xmlrpc.php">
+<meta property="og:image" content="https://learnopencv.com/wp-content/uploads/2015/11/imfill.jpg"><meta property="og:description" content="In this tutorial we will learn how to fill holes in a binary image. Consider the image on the left in Figure 1. Let’s say we want to find a binary mask that separates the coin from the background as shown in the right image. In this tutorial the circular region that contains the coin will […]"><meta property="og:title" content="Filling holes in an image using OpenCV ( Python / C++ )"><meta property="og:type" content="article"><meta property="og:url" content="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/"><meta name="twitter:image" content="https://learnopencv.com/wp-content/uploads/2015/11/imfill.jpg"><meta name="twitter:title" content="Filling holes in an image using OpenCV ( Python / C++ )"><meta name="twitter:card" content="summary"><meta name="twitter:description" content="In this tutorial we will learn how to fill holes in a binary image. Consider the image on the left in Figure 1. Let’s say we want to find a binary mask that separates the coin from the background as shown in the right image. In this tutorial the circular region that contains the coin will […]"><meta name="twitter:url" content="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/"><link rel="icon" href="https://learnopencv.com/wp-content/uploads/2017/04/cropped-favicon-512x512-32x32.png" sizes="32x32">
+<link rel="icon" href="https://learnopencv.com/wp-content/uploads/2017/04/cropped-favicon-512x512-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://learnopencv.com/wp-content/uploads/2017/04/cropped-favicon-512x512-180x180.png">
+<meta name="msapplication-TileImage" content="https://learnopencv.com/wp-content/uploads/2017/04/cropped-favicon-512x512-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			.fa fa-times:before {
+	content: "\f00d" !important;
+}
+.sidebar li {
+	border-bottom: 1px solid #ccc;}
+#genesis-sidebar-primary li a:hover{color:#006cff !important;}
+.fa fa-times {
+	font-family: "Font Awesome 5 Free" !important;
+	font-style: normal !important
+}
+.home {
+	background-color: #ffffff;
+}
+#tpbr_box {
+	font-size: 20px !important;
+}
+#tpbr_calltoaction {
+	box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.34);
+	background: #f0482c !important;
+	font-size: 18px;
+	padding: 0 20px !important;
+}
+.sidebar .widget {
+	margin-bottom: 30px;
+}
+.code-blk .line td {
+	font-size: 16px !important;
+}
+ @media only screen and (max-width: 800px) {
+.site-title {
+	text-align: left;
+}
+#genesis-nav-primary {
+	float: right !important;
+	margin-top: 20px;
+}
+.site-header .title-area {
+	text-align: left;
+	float: left;
+	width: 50%;
+}
+.entry-title {
+	font-size: 36px;
+	font-size: 23px;
+}
+.wp-block-image, .aligncenter {
+	margin: 0;
+	width: 100%
+}
+.common_authors .author_details {
+	display: inline-block !important;
+	width: auto;
+	flex: inherit
+}
+body > div {
+	font-size: 16px;
+}
+body .entry {
+	margin-bottom: 30px !important;
+}
+}
+ @media only screen and (max-width: 500px) {
+body article {
+	margin-bottom: 15px;
+!important
+}
+.site-title a {
+	font-size: 23px !important
+}
+#genesis-nav-primary {
+	float: right !important;
+	margin-top: 20px;
+}
+.site-header .title-area {
+	text-align: left;
+	float: left;
+	width: 70%;
+}
+.entry-title {
+	font-size: 18px;
+}
+.wp-block-image, .aligncenter {
+	margin: 0;
+	width: 100%
+}
+.common_authors .author_details {
+	display: inline-block !important;
+	width: auto;
+	flex: inherit
+}
+body > div {
+	font-size: 15px;
+}
+body .entry {
+	margin-bottom: 15px !important;
+}
+}
+.custom_read_more {
+	background: #006cff;
+	padding: 10px 20px;
+	color: #fff;
+	margin-top: 15px;
+	display: block;
+	float: left;
+	font-size: 16px;
+	font-weight: 500;
+}
+.archive-pagination .active a {
+	background-color: #006cff;
+}
+.archive-pagination li {
+	display: inline;
+	margin-right: 5px;
+}
+.is-menu-wrapper {
+	right: 80px;
+	top: 35px;
+}
+.home .post-categories a:nth-child(n+6), .home .post-tags a:nth-child(n+6) {
+	display: none;
+}
+/* 07 April 2021 */
+p:empty:before {
+	content: inherit;
+}
+body p, .elementor-widget-text-editor {
+	color: #3c3c3c;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 29px;
+}
+h2 {
+	color: #333;
+	font-size: 31px;
+	font-weight: 500;
+}
+h3 {
+	color: #333;
+	font-size: 26px;
+	font-weight: 500;
+	letter-spacing: 0px;
+}
+h4 {
+	color: #333;
+	font-size: 23px;
+	font-weight: 500;
+	letter-spacing: 0px;
+}
+h2 strong, h3 strong {
+	font-weight: 500
+}
+h1, h2, h3, h4, h5, h6, .entry-title a {
+	font-family: "Raleway", Sans-serif !important;
+	font-weight:600
+}
+
+figcaption, p, em, strong, b, body {
+	font-family: "Roboto", Sans-serif !important;
+}
+body {
+	font-weight: 400
+}
+ol li {
+	color: #3c3c3c;
+	font-family: "Roboto", Sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 29px;
+}
+.sidebar .widget-title, .sidebar h4 {
+	font-weight: 600;
+	font-size: 18px;
+	text-transform:capitalize
+}
+figcaption {
+	color: #3c3c3c;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 29px;
+}
+.sidebar li {
+	font-weight: 400;
+}
+ @media only screen and (max-width: 768px) {
+.subscribe-box {
+	font-size: 14px;
+}
+.subscribe-box h3 {
+	font-size: 24px
+}
+body p {
+	font-size: 16px
+}
+}
+a.elementor-widget-text-editor {
+	color: #3c3c3c !important;
+}
+.site-footer p {
+	color: #fff !important
+}
+.site-footer a:hover, #genesis-footer-widgets a:hover {
+	color: #006cff !important
+}
+#user-profile-6 p {
+	font-size: 16px !important;
+}
+#cookie-notice {
+	background-color: #1a1a1a !important;
+}
+#cookie-notice .cn-button {
+	background: #006cff !important;
+	color: #fff !important
+}
+#cookie-notice a {
+	color: #006cff !important
+}
+.subscribe-btn {
+	background: #006cff;
+	color: #fff;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	padding: 15px;
+	display: inline-block;
+	max-width: 300px;
+	box-shadow: none;
+	text-decoration: none !important
+}
+a.button.loblue {
+	background-color: #006cff !important;
+	border: 1px solid #006cff !important;
+	color: #fff !important;
+}
+.cv4faces, .download-code {
+	border-color: #006cff;
+}
+h1.entry-title {
+	font-size: 33px;
+	font-weight: 500;
+	color: #1c1c1d
+}
+.custom_read_more:hover {
+	background: #303236;
+	color: #fff
+}
+.subscribe-box {
+	font-size: 16px;
+	border-style: dashed;
+	border-color: #006cff;
+	transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 5% 3%;
+	text-align: center;
+	background: #f9f9f9
+}
+.subscribe-btn:hover {
+	background: #303236;
+	color: #fff;
+}
+.fa fa-times:before {
+	content: "\f00d";
+	font-family: "Font Awesome 5 Free";
+}
+.fa fa-times {
+	font-style: normal !important;
+}
+.subscribe-box {
+	display: inline-block
+}
+.ql-img-displayed-equation {
+	cursor: pointer
+}
+.elementor-widget-theme-post-content {
+	color: inherit;
+}
+.toc-gutenberg:before {
+	content: "Table of Contents";
+	font-size: 21px;
+	font-weight: 400;
+	margin-bottom: 30px;
+	display: block
+}
+.toc-gutenberg {
+	padding: 30px 40px;
+	max-height: var(--toc-body-max-height);
+	overflow-y: auto;
+	background: #fafafa;
+	margin: 30px 0 !important;
+	border: 1px solid #dfdfdf;
+}
+.toc-gutenberg li a {
+	text-decoration: none;
+	color: #0170B9;
+}
+.toc-gutenberg li {
+	margin-bottom: .5em;
+	margin-left: 15px;
+	display: block;
+}
+.toc-gutenberg li ol {
+	margin-top: .5em;
+	margin-left: 15px !important;
+}
+.toc-gutenberg li a:hover {
+	color: #343434
+}
+.toc-gutenberg, .toc-gutenberg ol {
+	counter-reset: item
+}
+.toc-gutenberg li:before {
+	content: counters(item, ".") ". ";
+	counter-increment: item
+}
+.is-search-input {
+	border-radius: 5px 0 0 5px !important
+}
+.is-form-style button span {
+	border-radius: 0 5px 5px 0 !important
+}
+.is-form-style input.is-search-input, .is-search-icon, .is-search-submit {
+	height: 45px !important
+}
+.is-search-icon {
+	width: 36px;
+	padding-top: 11px !important;
+}
+.elementor-28323 .elementor-widget:not(:last-child) , .elementor-element-6171d7cd .elementor-widget:not(:last-child) {
+	margin-bottom: 0 !important;
+}
+.e--pointer-underline .elementor-item::after {
+	height: 2px;
+}
+li.elementorSubscribePopup {
+	display: none
+}
+@media only screen and (max-width:1024px) {
+li.elementorSubscribePopup {
+	display: inherit !important;
+}
+.elementor-28323 .elementor-element.elementor-element-65831edc {
+	order: 2;
+}
+.elementor-28323 .elementor-element.elementor-element-22c7dd84 {
+	order: 1;
+}
+}
+@media only screen and (max-width:768px) {
+.elementor-28323 .elementor-element.elementor-element-37c43e1e{order:3 !important; text-align:center;}
+.elementor-28323 .elementor-element.elementor-element-22c7dd84 {
+	order: 3 !important;
+	}
+
+.elementor-28323 .elementor-element.elementor-element-73d97576 .elementskit-menu-hamburger{float:left !important}
+
+}
+#custom_html-13 h4 {color: #e51075; font-weight:700}
+.fa fa-times::before {
+    font-weight: 900;
+	
+}
+[class^="eicon"] {
+   
+	font-weight: 900;}
+.elementor-33489 .elementor-element.elementor-element-ddff240 .elementor-button {background:#fff!important}
+
+[class^="eicon"]::before, [class*=" eicon-"]::before {
+    content: "\f00d" !important";
+	
+}
+[class^="eicon"]::before, [class*=" eicon-"]::before {
+    content: "\f00d" !important;
+    font-family: "Font Awesome 5 Free" !important;
+}
+@media only screen and (max-width: 800px) {
+	#ekit-megamenu-top-bar #menu-top-bar {display:initial !important}}
+.elementor-28323 .elementor-element.elementor-element-73d97576 .elementskit-menu-container {
+    background-color: #131417 !important;
+}		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shCore.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shBrushCpp.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shBrushPython.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery-migrate.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jq-sticky-anything.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/tpbr_front.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/flatpickr.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/select2.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/global.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/v4-shims.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/wp-quicklatex-frontend.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/leadbox-867.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shBrushMatlabKey.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/embed-count-click.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/stickThis.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/hoverIntent.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/superfish.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/superfish.args.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/skip-links.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/fadeup.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend-script.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/widget-scripts.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/detectmobilebrowser.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/theia-sticky-sidebar.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/ivory-search.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.smartmenus.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/webpack.runtime.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend-modules.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/waypoints.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/core.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/swiper.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/share-link.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/dialog.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend.min.js(1).下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/app.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/ResizeSensor.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/sticky-sidebar.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.jsticky.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/webpack-pro.runtime.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend.min.js(2).下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/preloaded-elements-handlers.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jet-sticky-frontend.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/animate-circle.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/elementor.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/preloaded-modules.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.sticky.min.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/js" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/pa-5bb69d586cee870016000122.js.下載" rel="preload" as="script"><link href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/front.min.js.下載" rel="preload" as="script"><script src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/can-i-show.js.下載"></script><script async="" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/count.js.下載"></script><style></style><style id="theia-sticky-sidebar-stylesheet-TSS">.theiaStickySidebar:after {content: ""; display: table; clear: both;}</style><link rel="stylesheet" type="text/css" href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shCore.css"><link rel="stylesheet" type="text/css" href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shThemeDefault.css"><script src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/count-data.js.下載"></script><link rel="prefetch" href="https://learnopencv.com/terms-and-conditions/"></head>
+		<body data-rsssl="1" class="post-template-default single single-post postid-1618 single-format-standard genesis header-full-width content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-visible masonry elementor-default elementor-kit-34195 e--ua-blink e--ua-chrome e--ua-webkit cookies-not-set" itemscope="" itemtype="https://schema.org/WebPage" data-elementor-device-mode="desktop"><div data-elementor-type="header" data-elementor-id="28323" class="elementor elementor-28323" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-67d7d912 elementor-section-content-middle elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="67d7d912" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;}" style="width: 1903px; left: 0px;">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-37c43e1e" data-id="37c43e1e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-2a57c272 elementor-widget elementor-widget-theme-site-title elementor-widget-heading" data-id="2a57c272" data-element_type="widget" data-widget_type="theme-site-title.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="https://learnopencv.com/">LearnOpenCV</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-65831edc" data-id="65831edc" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-73d97576 elementor-widget elementor-widget-ekit-nav-menu" data-id="73d97576" data-element_type="widget" data-widget_type="ekit-nav-menu.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con ekit_menu_responsive_tablet" data-hamburger-icon="icon icon-burger-menu" data-hamburger-icon-type="icon" data-responsive-breakpoint="1024">            <button class="elementskit-menu-hamburger elementskit-menu-toggler">
+                <i aria-hidden="true" class="ekit-menu-icon icon icon-burger-menu"></i>            </button>
+            <div id="ekit-megamenu-top-bar" class="elementskit-menu-container elementskit-menu-offcanvas-elements elementskit-navbar-nav-default elementskit_line_arrow ekit-nav-menu-one-page-" ekit-dom-added="yes"><ul id="menu-top-bar" class="elementskit-navbar-nav elementskit-menu-po-center submenu-click-on-icon"><li id="menu-item-754" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-754 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class="ekit-menu-" href="https://learnopencv.com/" itemprop="url">Home</a></li>
+<li id="menu-item-33008" class="elementorSubscribePopup menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-33008 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class="ekit-menu-" href="https://learnopencv.com/#" itemprop="url">Subscribe</a></li>
+<li id="menu-item-16745" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-16745 nav-item elementskit-dropdown-has relative_position elementskit-dropdown-menu-default_width elementskit-mobile-builder-content" data-vertical-menu="750px"><a class="ekit-menu- ekit-menu-dropdown-toggle" href="https://learnopencv.com/category/install/" itemprop="url">Getting Started<i class="fa fa-chevron-down elementskit-submenu-indicator"></i></a>
+<ul class="elementskit-dropdown elementskit-submenu-panel">
+	<li id="menu-item-16989" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16989 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://learnopencv.com/category/install/" itemprop="url">Installation</a>	</li><li id="menu-item-35265" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35265 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://learnopencv.com/getting-started-with-opencv/" itemprop="url">Getting Started with OpenCV</a>	</li><li id="menu-item-13087" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13087 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://learnopencv.com/learn-pytorch/" itemprop="url">PyTorch</a>	</li><li id="menu-item-18882" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18882 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://learnopencv.com/learn-keras-and-tensorflow/" itemprop="url">Keras &amp; Tensorflow</a>	</li><li id="menu-item-16748" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16748 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://learnopencv.com/computer-vision-resources" itemprop="url">Resource Guide</a></li></ul>
+</li>
+<li id="menu-item-16744" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-16744 nav-item elementskit-dropdown-has relative_position elementskit-dropdown-menu-default_width elementskit-mobile-builder-content" data-vertical-menu="750px"><a class="ekit-menu- ekit-menu-dropdown-toggle" href="https://learnopencv.com/official-opencv-courses/" itemprop="url">Courses<i class="fa fa-chevron-down elementskit-submenu-indicator"></i></a>
+<ul class="elementskit-dropdown elementskit-submenu-panel">
+	<li id="menu-item-4153" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4153 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://learnopencv.com/official-opencv-courses/" itemprop="url">OpenCV Courses</a>	</li><li id="menu-item-28680" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28680 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://courses.opencv.org/" itemprop="url">OpenCV Courses [Enrolled Users]</a>	</li><li id="menu-item-13093" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13093 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class=" dropdown-item" href="https://courses.learnopencv.com/" itemprop="url">CV4Faces [Enrolled Users]</a></li></ul>
+</li>
+<li id="menu-item-859" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-859 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class="ekit-menu-" href="https://learnopencv.com/computer-vision-resources" itemprop="url">Resources</a></li>
+<li id="menu-item-4009" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4009 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class="ekit-menu-" href="https://learnopencv.com/computer-vision-machine-learning-artificial-intelligence-consulting/" itemprop="url">AI Consulting</a></li>
+<li id="menu-item-753" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-753 nav-item elementskit-mobile-builder-content" data-vertical-menu="750px"><a class="ekit-menu-" href="https://learnopencv.com/about/" itemprop="url">About</a></li>
+</ul>
+				<div class="elementskit-nav-identity-panel">
+					<div class="elementskit-site-title">
+						<a class="elementskit-nav-logo" href="https://learnopencv.com/" target="_self" rel="">
+                            <img width="197" height="40" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20197%2040&#39;%3E%3C/svg%3E" class="attachment-full size-full" alt="Learnopencv Logo" title="logo – LearnOpenCV " data-lazy-src="https://learnopencv.com/wp-content/uploads/2021/03/logo.png"><noscript><img width="197" height="40" src="https://learnopencv.com/wp-content/uploads/2021/03/logo.png" class="attachment-full size-full" alt="Learnopencv Logo" title="logo – LearnOpenCV&nbsp;" /></noscript>
+						</a> 
+					</div>
+					<button class="elementskit-menu-close elementskit-menu-toggler" type="button">X</button>
+				</div>
+			</div><div class="elementskit-menu-overlay elementskit-menu-offcanvas-elements elementskit-menu-toggler ekit-nav-menu--overlay"></div></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-22c7dd84" data-id="22c7dd84" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-2ae4ac21 elementor-hidden-phone elementor-widget elementor-widget-wp-widget-is_widget" data-id="2ae4ac21" data-element_type="widget" data-widget_type="wp-widget-is_widget.default">
+				<div class="elementor-widget-container">
+			<style type="text/css">			.is-form-id-16719 .is-search-submit:focus,
+			.is-form-id-16719 .is-search-submit:hover,
+			.is-form-id-16719 .is-search-submit,
+            .is-form-id-16719 .is-search-icon {
+			color: #868ca0 !important;            background-color: #25282f !important;            border-color: #25282f !important;			}
+                        	.is-form-id-16719 .is-search-submit path {
+					fill: #868ca0 !important;            	}
+            			.is-form-id-16719 .is-search-input::-webkit-input-placeholder {
+			    color: #868ca0 !important;
+			}
+			.is-form-id-16719 .is-search-input:-moz-placeholder {
+			    color: #868ca0 !important;
+			    opacity: 1;
+			}
+			.is-form-id-16719 .is-search-input::-moz-placeholder {
+			    color: #868ca0 !important;
+			    opacity: 1;
+			}
+			.is-form-id-16719 .is-search-input:-ms-input-placeholder {
+			    color: #868ca0 !important;
+			}
+                        			.is-form-style-1.is-form-id-16719 .is-search-input:focus,
+			.is-form-style-1.is-form-id-16719 .is-search-input:hover,
+			.is-form-style-1.is-form-id-16719 .is-search-input,
+			.is-form-style-2.is-form-id-16719 .is-search-input:focus,
+			.is-form-style-2.is-form-id-16719 .is-search-input:hover,
+			.is-form-style-2.is-form-id-16719 .is-search-input,
+			.is-form-style-3.is-form-id-16719 .is-search-input:focus,
+			.is-form-style-3.is-form-id-16719 .is-search-input:hover,
+			.is-form-style-3.is-form-id-16719 .is-search-input,
+			.is-form-id-16719 .is-search-input:focus,
+			.is-form-id-16719 .is-search-input:hover,
+			.is-form-id-16719 .is-search-input {
+                                color: #868ca0 !important;                                border-color: #25282f !important;                                background-color: #25282f !important;			}
+                        </style><form class="is-search-form is-form-style is-form-style-3 is-form-id-16719 " action="https://learnopencv.com/" method="get" role="search"><label for="is-search-input-16719"><span class="is-screen-reader-text">Search for:</span><input type="search" id="is-search-input-16719" name="s" value="" class="is-search-input" placeholder="Search here..." autocomplete="off"></label><button type="submit" class="is-search-submit"><span class="is-screen-reader-text">Search Button</span><span class="is-search-icon"><svg focusable="false" aria-label="Search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></span></button><input type="hidden" name="id" value="16719"></form>		</div>
+				</div>
+				<div class="elementor-element elementor-element-6db3a0c7 elementor-hidden-desktop elementor-hidden-tablet elementor-widget elementor-widget-elementskit-header-search" data-id="6db3a0c7" data-element_type="widget" data-widget_type="elementskit-header-search.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con">        <a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#ekit_modal-popup-6db3a0c7" class="ekit_navsearch-button ekit-modal-popup">
+            <i aria-hidden="true" class="icon icon-search11"></i>        </a>
+        <!-- language switcher strart -->
+        <!-- xs modal -->
+        <div class="zoom-anim-dialog mfp-hide ekit_modal-searchPanel" id="ekit_modal-popup-6db3a0c7">
+            <div class="ekit-search-panel">
+            <!-- Polylang search - thanks to Alain Melsens -->
+                <form role="search" method="get" class="ekit-search-group" action="https://learnopencv.com/">
+                    <input type="search" class="ekit_search-field" placeholder="Search..." value="" name="s">
+                    <button type="submit" class="ekit_search-button">
+                        <i aria-hidden="true" class="icon icon-search11"></i>                    </button>
+                </form>
+            </div>
+        </div><!-- End xs modal -->
+        <!-- end language switcher strart -->
+        </div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+		<div class="site-container"><ul class="genesis-skip-link"><li><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li><li><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#genesis-content" class="screen-reader-shortcut"> Skip to main content</a></li><li><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#genesis-sidebar-primary" class="screen-reader-shortcut"> Skip to primary sidebar</a></li><li><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#genesis-footer-widgets" class="screen-reader-shortcut"> Skip to footer</a></li></ul><div class="site-inner"><div class="content-sidebar-wrap"><main class="content" id="genesis-content"><article class="post-1618 post type-post status-publish format-standard has-post-thumbnail category-how-to tag-holes tag-imfill entry" aria-label="Filling holes in an image using OpenCV ( Python / C++ )" itemscope="" itemtype="https://schema.org/CreativeWork"><header class="entry-header"><h1 class="entry-title" itemprop="headline">Filling holes in an image using OpenCV ( Python / C++ )</h1>
+    <div class="common_authors">
+         
+            <div class="author_details">  <img alt="" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/708995cd13fb5756f6bc418aecb23b78.jpeg" class="avatar avatar-32 photo lazyloaded" height="32" width="32" srcset="https://secure.gravatar.com/avatar/708995cd13fb5756f6bc418aecb23b78?s=64&amp;d=mm&amp;r=g 2x" data-ll-status="loaded"><noscript><img alt='' src='https://secure.gravatar.com/avatar/708995cd13fb5756f6bc418aecb23b78?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/708995cd13fb5756f6bc418aecb23b78?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>                <a href="https://learnopencv.com/author/spmallick/"> Satya Mallick</a></div>
+            </div>
+    <div class="homepage_comments_data">
+        November 23, 2015 
+
+        <span class="entry-comments-link"><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#disqus_thread" data-disqus-identifier="1618 https://learnopencv.com/?p=1618"><span class="dsq-postid" data-dsqidentifier="1618 https://learnopencv.com/?p=1618">10 Comments</span></a></span>    </div>
+	<div class="post-categories">
+	<a href="https://learnopencv.com/category/how-to/" rel="category tag">how-to</a>	</div>
+    <p class="entry-meta"><time class="entry-time" itemprop="datePublished" datetime="2015-11-23T07:37:58-08:00">November 23, 2015</time>   <span class="entry-comments-link"><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#disqus_thread" data-disqus-identifier="1618 https://learnopencv.com/?p=1618"><span class="dsq-postid" data-dsqidentifier="1618 https://learnopencv.com/?p=1618">10 Comments</span></a></span> </p></header><div class="entry-content" itemprop="text">
+<div class="wp-block-image"><figure class="aligncenter is-resized"><a href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/imfill.jpg"><img src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/imfill.jpg" alt="imfill for OpenCV" class="wp-image-1620 lazyloaded" width="675" height="221" title=" – LearnOpenCV " sizes="(max-width: 675px) 100vw, 675px" srcset="https://learnopencv.com/wp-content/uploads/2015/11/imfill.jpg 900w, https://learnopencv.com/wp-content/uploads/2015/11/imfill-300x98.jpg 300w" data-ll-status="loaded"><noscript><img src="/wp-content/uploads/2015/11/imfill.jpg" alt="imfill for OpenCV"class="wp-image-1620" width="675" height="221" srcset="https://learnopencv.com/wp-content/uploads/2015/11/imfill.jpg 900w, https://learnopencv.com/wp-content/uploads/2015/11/imfill-300x98.jpg 300w" sizes="(max-width: 675px) 100vw, 675px" /title=" – LearnOpenCV&nbsp;" /></noscript></a><figcaption>Figure 1. Left : Image of a nickel. Center : Thresholded and inverted. Right : Holes filled.</figcaption></figure></div>
+
+
+
+<p>In this tutorial we will learn how to fill holes in a binary image. Consider the image on the left in Figure 1. Let’s say we want to find a binary mask that&nbsp;separates the coin from the background as shown in the right image. In this tutorial the circular region that contains the coin will also be referred to as the foreground.</p>
+
+
+
+<p>Notice that the boundary of the coin is dark and distinct from its white background. So, we use simple image <u> <a href="https://learnopencv.com/opencv-threshold-python-cpp" target="_blank" rel="noopener">thresholding</a></u> to separate the boundary from the background. In other words, we say pixels with intensities above a certain value ( threshold ) are the background and the rest are the foreground. The center image shows this thresholded image ( black represents background, and white represents foreground ). Unfortunately, even though the boundary has been nicely extracted ( it is solid white ), the interior of the coin has intensities similar to the background. Therefore, the thresholding operation cannot distinguish it from the background. How do we fill all pixels inside the circular boundary with white ?</p>
+
+
+
+		<div data-elementor-type="section" data-elementor-id="33489" class="elementor elementor-33489" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-67540b7 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="67540b7" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-d273d2e" data-id="d273d2e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-393f76e elementor-widget elementor-widget-image" data-id="393f76e" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="http://opencv.org/courses/" target="_blank">
+							<img width="500" height="337" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/2__opencv_02-2.jpg" class="attachment-full size-full lazyloaded" alt="" title="2__opencv_02 – LearnOpenCV " sizes="(max-width: 500px) 100vw, 500px" srcset="https://learnopencv.com/wp-content/uploads/2021/05/2__opencv_02-2.jpg 500w, https://learnopencv.com/wp-content/uploads/2021/05/2__opencv_02-2-300x202.jpg 300w" data-ll-status="loaded"><noscript><img width="500" height="337" src="https://learnopencv.com/wp-content/uploads/2021/05/2__opencv_02-2.jpg" class="attachment-full size-full" alt="" srcset="https://learnopencv.com/wp-content/uploads/2021/05/2__opencv_02-2.jpg 500w, https://learnopencv.com/wp-content/uploads/2021/05/2__opencv_02-2-300x202.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" title="2__opencv_02 – LearnOpenCV&nbsp;" /></noscript>								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-54c3bd6" data-id="54c3bd6" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-5a16cc8b elementor-widget elementor-widget-text-editor" data-id="5a16cc8b" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+					<div><strong style="font-size: 18px;">Official OpenCV Courses</strong><br>
+Start your exciting journey from an absolute Beginner to Mastery in AI, Computer Vision &amp; Deep Learning!
+
+</div>					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-ddff240 elementor-align-center elementor-widget elementor-widget-button" data-id="ddff240" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="https://opencv.org/courses/" target="_blank" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">Learn More</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+		
+<!---<div class="cv4faces" style="border-color:#09cf78;font-size: 18px;">I’ve partnered with OpenCV.org as their exclusive and official course provider to bring you official courses in Computer Vision, Machine Learning, and AI! Sign Up now to Enter The World Of Computer Vision!<br /><br /><b>Available at discounts up to 60% during the Kickstarter Campaign. Offer Ends Soon!</b>
+<br /><br />
+<div style="text-align: center;"><a class="button small loblue" style="text-decoration: none;background:#09cf78 !important; border-color:#09cf78 !important" href="https://www.kickstarter.com/projects/opencv/opencv-for-beginners?ref=2s1jzq" target="_blank"><b>GO TO KICKSTARTER</b></a></div>
+</div>-->
+
+
+
+
+
+<!--- <div class="cv4faces">I've partnered with OpenCV.org to bring you official courses in <strong>Computer Vision</strong>, <strong>Machine Learning</strong>, and <strong>AI</strong>! Sign up now and take your skills to the next level!<br /><br />
+<div style="text-align: center;"><a class="button small loblue" style="text-decoration: none;" href="https://learnopencv.com/official-opencv-courses/" target="_blank" rel="noopener noreferrer">Official Courses by OpenCV.org</a></div>
+</div> --->
+
+
+
+<p>MATLAB has a function called <a href="http://www.mathworks.com/help/images/ref/imfill.html" target="_blank" rel="noopener">imfill</a>&nbsp;that allows you to fill holes, and you can use it in the following way.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><div id="highlighter_795139" class="syntaxhighlighter code-blk "><div class="bar"><div class="toolbar"><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#viewSource" title="view source" class="item viewSource" style="width: 16px; height: 16px;">view source</a><div class="item copyToClipboard"><embed width="16" height="16" id="highlighter_795139_clipboard" type="application/x-shockwave-flash" title="copy to clipboard" allowscriptaccess="always" wmode="transparent" flashvars="highlighterId=highlighter_795139" menu="false" src="https://learnopencv.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/clipboard.swf"></div><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#printSource" title="print" class="item printSource" style="width: 16px; height: 16px;">print</a><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#about" title="?" class="item about" style="width: 16px; height: 16px;">?</a></div></div><div class="lines"><div class="line alt1"><table><tbody><tr><td class="number"><code>1</code></td><td class="content"><code class="comments">% MATLAB code for filling holes in a binary image.</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>2</code></td><td class="content"><code class="plain">im = imfill(im,</code><code class="string">'holes'</code><code class="plain">);</code></td></tr></tbody></table></div></div></div></div>
+
+
+<h2>imfill in OpenCV</h2>
+
+
+
+<p>There is no imfill function in OpenCV, but we can surely write one! The idea is rather simple. We know the pixel (0,0) is connected to the background. So we can extract the background, by simply doing a floodfill operation from pixel (0, 0). Pixels that are not affected by the floodfill operation are necessarily inside the boundary. The flood-filled image when inverted and combined with the thresholded image gives the foreground mask!</p>
+
+
+
+<h3>Steps for implementing imfill in OpenCV</h3>
+
+
+
+<p>The image and corresponding steps are given below.</p>
+
+
+
+<div class="wp-block-image"><figure class="alignleft"><a href="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/imfill-opencv-steps.jpg"><img width="154" height="751" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/imfill-opencv-steps.jpg" alt="imfill opencv steps" class="wp-image-1639 lazyloaded" title=" – LearnOpenCV " data-ll-status="loaded"><noscript><img width="154" height="751" src="/wp-content/uploads/2015/11/imfill-opencv-steps.jpg" alt="imfill opencv steps"class="wp-image-1639"/title=" – LearnOpenCV&nbsp;" /></noscript></a><figcaption>Figure 2.</figcaption></figure></div>
+
+
+
+<p></p>
+
+
+
+<p><br><br>Read in the image.<br><br><br><br></p>
+
+
+
+<p>Threshold the input image to obtain a binary image.<br><br><br><br><br>Flood fill from pixel (0, 0). Notice the difference between the outputs of step 2 and step 3 is that the background in step 3 is now white.<br><br><br><br>Invert the flood filled image ( i.e. black becomes white and white becomes black ).<br><br><br>Combine the thresholded image with the inverted flood filled image using bitwise OR operation to obtain the final foreground mask with holes filled in. The image in Step 4 has some black areas inside the boundary. By design the image in Step 2 has those holes filled in. So we combine the two to get the mask.</p>
+
+
+
+<h2><br><br>C++ and Python code for filling holes in a binary image</h2>
+
+
+
+<div class="download-code">
+<strong> Download Code</strong>
+To easily follow along this tutorial, please download code by clicking on the button below. It's FREE!
+<br><br>
+<div style="text-align: center;"><a class="elementorDownloadPopup subscribe-btn" href="javascript:void(0)">Download Code</a></div>
+
+</div>
+
+
+
+<p>And here is how it is done in code<br><strong> C++ </strong></p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><div id="highlighter_20639" class="syntaxhighlighter code-blk "><div class="bar                    "><div class="toolbar"><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#viewSource" title="view source" class="item viewSource" style="width: 16px; height: 16px;">view source</a><div class="item copyToClipboard"><embed width="16" height="16" id="highlighter_20639_clipboard" type="application/x-shockwave-flash" title="copy to clipboard" allowscriptaccess="always" wmode="transparent" flashvars="highlighterId=highlighter_20639" menu="false" src="https://learnopencv.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/clipboard.swf"></div><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#printSource" title="print" class="item printSource" style="width: 16px; height: 16px;">print</a><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#about" title="?" class="item about" style="width: 16px; height: 16px;">?</a></div></div><div class="lines"><div class="line alt1"><table><tbody><tr><td class="number"><code>1</code></td><td class="content"><code class="preprocessor">#include "opencv2/opencv.hpp"</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>2</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>3</code></td><td class="content"><code class="keyword bold">using</code> <code class="keyword bold">namespace</code> <code class="plain">cv;</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>4</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>5</code></td><td class="content"><code class="color1 bold">int</code> <code class="plain">main(</code><code class="color1 bold">int</code> <code class="plain">argc, </code><code class="color1 bold">char</code> <code class="plain">**argv)</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>6</code></td><td class="content"><code class="plain">{</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>7</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Read image</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>8</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">Mat im_in = imread(</code><code class="string">"nickel.jpg"</code><code class="plain">, IMREAD_GRAYSCALE);</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>9</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>10</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Threshold.</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>11</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Set values equal to or above 220 to 0.</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>12</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Set values below 220 to 255.</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>13</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">Mat im_th;</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>14</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">threshold(im_in, im_th, 220, 255, THRESH_BINARY_INV);</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>15</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>16</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Floodfill from point (0, 0)</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>17</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">Mat im_floodfill = im_th.clone();</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>18</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">floodFill(im_floodfill, cv::Point(0,0), Scalar(255));</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>19</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>20</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Invert floodfilled image</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>21</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">Mat im_floodfill_inv;</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>22</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">bitwise_not(im_floodfill, im_floodfill_inv);</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>23</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>24</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Combine the two images to get the foreground.</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>25</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">Mat im_out = (im_th | im_floodfill_inv);</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>26</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>27</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="comments">// Display images</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>28</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">imshow(</code><code class="string">"Thresholded Image"</code><code class="plain">, im_th);</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>29</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">imshow(</code><code class="string">"Floodfilled Image"</code><code class="plain">, im_floodfill);</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>30</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">imshow(</code><code class="string">"Inverted Floodfilled Image"</code><code class="plain">, im_floodfill_inv);</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>31</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">imshow(</code><code class="string">"Foreground"</code><code class="plain">, im_out);</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>32</code></td><td class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain">waitKey(0);</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>33</code></td><td class="content"><code class="plain">}</code></td></tr></tbody></table></div></div></div></div>
+
+
+<p><strong> Python </strong></p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><div id="highlighter_86576" class="syntaxhighlighter code-blk "><div class="bar           "><div class="toolbar"><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#viewSource" title="view source" class="item viewSource" style="width: 16px; height: 16px;">view source</a><div class="item copyToClipboard"><embed width="16" height="16" id="highlighter_86576_clipboard" type="application/x-shockwave-flash" title="copy to clipboard" allowscriptaccess="always" wmode="transparent" flashvars="highlighterId=highlighter_86576" menu="false" src="https://learnopencv.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/clipboard.swf"></div><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#printSource" title="print" class="item printSource" style="width: 16px; height: 16px;">print</a><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#about" title="?" class="item about" style="width: 16px; height: 16px;">?</a></div></div><div class="lines"><div class="line alt1"><table><tbody><tr><td class="number"><code>1</code></td><td class="content"><code class="keyword">import</code> <code class="plain">cv2;</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>2</code></td><td class="content"><code class="keyword">import</code> <code class="plain">numpy as np;</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>3</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>4</code></td><td class="content"><code class="comments"># Read image</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>5</code></td><td class="content"><code class="plain">im_in </code><code class="keyword">=</code> <code class="plain">cv2.imread(</code><code class="string">"nickel.jpg"</code><code class="plain">, cv2.IMREAD_GRAYSCALE);</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>6</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>7</code></td><td class="content"><code class="comments"># Threshold.</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>8</code></td><td class="content"><code class="comments"># Set values equal to or above 220 to 0.</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>9</code></td><td class="content"><code class="comments"># Set values below 220 to 255.</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>10</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>11</code></td><td class="content"><code class="plain">th, im_th </code><code class="keyword">=</code> <code class="plain">cv2.threshold(im_in, </code><code class="value">220</code><code class="plain">, </code><code class="value">255</code><code class="plain">, cv2.THRESH_BINARY_INV);</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>12</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>13</code></td><td class="content"><code class="comments"># Copy the thresholded image.</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>14</code></td><td class="content"><code class="plain">im_floodfill </code><code class="keyword">=</code> <code class="plain">im_th.copy()</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>15</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>16</code></td><td class="content"><code class="comments"># Mask used to flood filling.</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>17</code></td><td class="content"><code class="comments"># Notice the size needs to be 2 pixels than the image.</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>18</code></td><td class="content"><code class="plain">h, w </code><code class="keyword">=</code> <code class="plain">im_th.shape[:</code><code class="value">2</code><code class="plain">]</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>19</code></td><td class="content"><code class="plain">mask </code><code class="keyword">=</code> <code class="plain">np.zeros((h</code><code class="keyword">+</code><code class="value">2</code><code class="plain">, w</code><code class="keyword">+</code><code class="value">2</code><code class="plain">), np.uint8)</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>20</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>21</code></td><td class="content"><code class="comments"># Floodfill from point (0, 0)</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>22</code></td><td class="content"><code class="plain">cv2.floodFill(im_floodfill, mask, (</code><code class="value">0</code><code class="plain">,</code><code class="value">0</code><code class="plain">), </code><code class="value">255</code><code class="plain">);</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>23</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>24</code></td><td class="content"><code class="comments"># Invert floodfilled image</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>25</code></td><td class="content"><code class="plain">im_floodfill_inv </code><code class="keyword">=</code> <code class="plain">cv2.bitwise_not(im_floodfill)</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>26</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>27</code></td><td class="content"><code class="comments"># Combine the two images to get the foreground.</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>28</code></td><td class="content"><code class="plain">im_out </code><code class="keyword">=</code> <code class="plain">im_th | im_floodfill_inv</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>29</code></td><td class="content">&nbsp;</td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>30</code></td><td class="content"><code class="comments"># Display images.</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>31</code></td><td class="content"><code class="plain">cv2.imshow(</code><code class="string">"Thresholded Image"</code><code class="plain">, im_th)</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>32</code></td><td class="content"><code class="plain">cv2.imshow(</code><code class="string">"Floodfilled Image"</code><code class="plain">, im_floodfill)</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>33</code></td><td class="content"><code class="plain">cv2.imshow(</code><code class="string">"Inverted Floodfilled Image"</code><code class="plain">, im_floodfill_inv)</code></td></tr></tbody></table></div><div class="line alt2"><table><tbody><tr><td class="number"><code>34</code></td><td class="content"><code class="plain">cv2.imshow(</code><code class="string">"Foreground"</code><code class="plain">, im_out)</code></td></tr></tbody></table></div><div class="line alt1"><table><tbody><tr><td class="number"><code>35</code></td><td class="content"><code class="plain">cv2.waitKey(</code><code class="value">0</code><code class="plain">)</code></td></tr></tbody></table></div></div></div></div>
+
+
+<h2>Other techniques</h2>
+
+
+
+<p>There are other ways to solve the same problem. One way is to use <strong>morphological close</strong> operation. However, for morphological operations to work you will need to know the maximum size of the hole. Another way is to use <strong>findContours</strong> to find the contours and then fill it in using <strong>drawContours</strong>. I prefer the simplicity and speed of the technique described in this post.</p>
+
+
+
+<div class="subscribe-box">
+<h3 id="download">Subscribe &amp; Download Code</h3>
+
+If you liked this article and would like to download code (C++ and Python) and example images used in this post, please <a class="elementorDownloadPopup" href="javascript:void(0)">click here</a>. Alternately, sign up to receive a free <a class="elementorSubscribePopup" href="javascript:void(0)">Computer Vision Resource</a> Guide. In our newsletter, we share OpenCV tutorials and examples written in C++/Python, and Computer Vision and Machine Learning algorithms and news.
+
+<br><br>
+<div style="text-align: center;">
+<a class="elementorDownloadPopup subscribe-btn" href="javascript:void(0)">Download Example Code</a>
+</div>
+</div>
+<br><br>
+
+
+
+
+
+<p><script data-minify="1" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/leadbox-867.js.下載" type="text/javascript" data-leadbox="143948b73f72a2:173c9390c346dc" data-url="https://bigvisionllc.leadpages.net/leadbox/143948b73f72a2%3A173c9390c346dc/5649050225344512/" data-config="%7B%7D" defer=""></script></p>
+<!--<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+			xmlns:dc="http://purl.org/dc/elements/1.1/"
+			xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+		<rdf:Description rdf:about="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/"
+    dc:identifier="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/"
+    dc:title="Filling holes in an image using OpenCV ( Python / C++ )"
+    trackback:ping="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/trackback/" />
+</rdf:RDF>-->
+</div><footer class="entry-footer"><div class="post-tags">Tags: <a href="https://learnopencv.com/tag/holes/" rel="tag">holes</a> <a href="https://learnopencv.com/tag/imfill/" rel="tag">imfill</a></div><p class="entry-meta"><span class="entry-categories">Filed Under: <a href="https://learnopencv.com/category/how-to/" rel="category tag">how-to</a></span> </p></footer></article><div id="disqus_thread">
+				<div id="dcl_btn_container">
+			<button id="dcl_comment_btn" class="">
+				Load Comments			</button>
+		</div>
+	</div>
+</main><aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope="" itemtype="https://schema.org/WPSideBar" id="genesis-sidebar-primary" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+
+
+
+
+
+		
+<div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none; top: 0px; left: 1191.5px;"><section id="custom_html-12" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><h4 class="widget-title widgettitle">Stay In Touch</h4>
+<div class="textwidget custom-html-widget"><a href="javascript:void(0)" class="elementorSubscribePopup" style="background: #006cff; color: #fff;font-weight: 500;font-size: 16px;line-height: 20px;padding: 15px;display: inline-block;max-width: 300px;border-radius: 5px;">Subscribe To My Newsletter</a></div></div></section><section id="user-profile-6" class="widget user-profile"><div class="widget-wrap"><h4 class="widget-title widgettitle">About</h4>
+<p><span class="alignleft"><img alt="" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/708995cd13fb5756f6bc418aecb23b78(1).jpeg" class="avatar avatar-125 photo lazyloaded" height="125" width="125" srcset="https://secure.gravatar.com/avatar/708995cd13fb5756f6bc418aecb23b78?s=250&amp;d=mm&amp;r=g 2x" data-ll-status="loaded"><noscript><img alt='' src='https://secure.gravatar.com/avatar/708995cd13fb5756f6bc418aecb23b78?s=125&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/708995cd13fb5756f6bc418aecb23b78?s=250&#038;d=mm&#038;r=g 2x' class='avatar avatar-125 photo' height='125' width='125' /></noscript></span>I am an entrepreneur with a love for Computer Vision and Machine Learning with a dozen years of experience (and a Ph.D.) in the field. <a class="pagelink" href="https://learnopencv.com/about/">Read More…</a></p>
+</div></section><section id="custom_html-7" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><h4 class="widget-title widgettitle">Resources</h4>
+<div class="textwidget custom-html-widget"><a href="javascript:void(0)" class="elementorSubscribePopup" style="background: #006cff; color: #fff;font-weight: 500;font-size: 16px;line-height: 20px;padding: 15px;display: inline-block;max-width: 300px;border-radius: 5px;">Download Code (C++ / Python)</a></div></div></section><section id="custom_html-13" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><a target="_blank" href="https://bigvision.ai/" rel="noopener"><img src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/Big-Vision-Consulting-Visual-for-LOCV-.2jpg.jpg" alt="Big-Vision-Consulting-Visual-for-LOCV" class="lazyloaded" data-ll-status="loaded"><noscript><img src="https://learnopencv.com/wp-content/uploads/2021/08/Big-Vision-Consulting-Visual-for-LOCV-.2jpg.jpg" alt="Big-Vision-Consulting-Visual-for-LOCV" /></noscript></a></div></div></section><section id="custom_html-9" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><a target="_blank" href="https://opencv.org/courses/" rel="noopener"><img src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/AI-Courses-by-OpenCV.jpg" alt="Official AI Courses by OpenCV" class="lazyloaded" data-ll-status="loaded"><noscript><img src="https://learnopencv.com/wp-content/uploads/2021/07/AI-Courses-by-OpenCV.jpg" alt="Official AI Courses by OpenCV" /></noscript></a>
+
+
+	
+
+<!--
+<a href="https://opencv.org/courses">
+<img alt="AI Courses by OpenCV.org" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="/wp-content/uploads/2019/05/ai-courses-side-bar.png"/><noscript><img alt="AI Courses by OpenCV.org" src="/wp-content/uploads/2019/05/ai-courses-side-bar.png"/></noscript>
+</a>
+!--></div></div></section><section id="custom_html-14" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><a target="_blank" href="https://pallet.xyz/list/ai-jobs?" rel="noopener"><img src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/2__newsletter_-_1200_x_628__1_-1.jpg" alt="AI-Jobs" class="lazyloaded" data-ll-status="loaded"><noscript><img src="https://learnopencv.com/wp-content/uploads/2021/08/2__newsletter_-_1200_x_628__1_-1.jpg" alt="AI-Jobs" /></noscript></a></div></div></section><section id="recent-posts-6" class="widget widget_recent_entries"><div class="widget-wrap">
+		<h4 class="widget-title widgettitle">Recent Posts</h4>
+
+		<ul>
+											<li>
+					<a href="https://learnopencv.com/running-openvino-models-on-intel-integrated-gpu/">Running OpenVino Models on Intel Integrated GPU</a>
+									</li>
+											<li>
+					<a href="https://learnopencv.com/post-training-quantization-with-openvino-toolkit/">Post Training Quantization with OpenVino Toolkit</a>
+									</li>
+											<li>
+					<a href="https://learnopencv.com/introduction-to-intel-openvino-toolkit/">Introduction to Intel OpenVINO Toolkit</a>
+									</li>
+											<li>
+					<a href="https://learnopencv.com/human-action-recognition-using-detectron2-and-lstm/">Human Action Recognition using Detectron2 and LSTM</a>
+									</li>
+											<li>
+					<a href="https://learnopencv.com/paired-image-to-image-translation-pix2pix/">Pix2Pix:Image-to-Image Translation in PyTorch &amp; TensorFlow</a>
+									</li>
+					</ul>
+
+		</div></section><div class="resize-sensor" style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 370px; height: 1448px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div></div></aside></div></div></div><script data-minify="1" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/pa-5bb69d586cee870016000122.js.下載" async=""></script>
+<!-- Facebook -->
+<script>
+	function docReady(callbackFunction){
+	if(document.readyState != 'loading') 
+		callbackFunction(event)
+	else document.addEventListener("DOMContentLoaded", callbackFunction)
+}
+docReady(function(event) {
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '193036094536652');
+fbq('track', 'PageView');
+})
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=193036094536652&ev=PageView&noscript=1"
+/>
+</noscript>
+<!-- End Facebook -->		
+				
+		<style type="text/css" media="screen">.is-menu path.search-icon-path { fill: #848484;}body .popup-search-close:after, body .search-close:after { border-color: #848484;}body .popup-search-close:before, body .search-close:before { border-color: #848484;}</style><style type="text/css" media="screen">/* Ivory search custom CSS code */.search-icon {
+fill: #ffffff;
+position:relative;
+}
+</style><script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shCore.js.下載" id="syntaxhighlighter-core-js"></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shBrushMatlabKey.js.下載" id="syntaxhighlighter-brush-matlabkey-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shBrushCpp.js.下載" id="syntaxhighlighter-brush-cpp-js"></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/shBrushPython.js.下載" id="syntaxhighlighter-brush-python-js"></script>
+<script type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://learnopencv.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/styles/shCore.css?ver=2.1.364";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "https://learnopencv.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/styles/shThemeDefault.css?ver=2.1.364";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.clipboardSwf = 'https://learnopencv.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/clipboard.swf';
+	SyntaxHighlighter.config.strings.expandSource = 'show source';
+	SyntaxHighlighter.config.strings.viewSource = 'view source';
+	SyntaxHighlighter.config.strings.copyToClipboard = 'copy to clipboard';
+	SyntaxHighlighter.config.strings.copyToClipboardConfirmation = 'The code is in your clipboard now';
+	SyntaxHighlighter.config.strings.print = 'print';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['class-name'] = 'code-blk';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['tab-size'] = 2;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+});</script>
+
+
+
+
+
+
+<script type="text/javascript" id="dcl_comments-js-extra">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"learnopencv"};
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"1618 https:\/\/learnopencv.com\/?p=1618","disqusShortname":"learnopencv","disqusTitle":"Filling holes in an image using OpenCV ( Python \/ C++ )","disqusUrl":"https:\/\/learnopencv.com\/filling-holes-in-an-image-using-opencv-python-c\/","postId":"1618"};
+var dclCustomVars = {"dcl_progress_text":"Loading..."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/embed-count-click.min.js.下載" id="dcl_comments-js" defer=""></script>
+<script type="text/javascript" id="stickThis-js-extra">
+/* <![CDATA[ */
+var sticky_anything_engage = {"element":"#sliding-sidebar","topspace":"0","minscreenwidth":"769","maxscreenwidth":"999999","zindex":"0","legacymode":"","dynamicmode":"","debugmode":"","pushup":"#genesis-footer-widgets","adminbar":"1"};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/stickThis.js.下載" id="stickThis-js" defer=""></script>
+<script type="text/javascript" id="ppress-frontend-script-js-extra">
+/* <![CDATA[ */
+var pp_ajax_form = {"ajaxurl":"https:\/\/learnopencv.com\/wp-admin\/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"6b7eabb179","disable_ajax_form":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend.min.js.下載" id="ppress-frontend-script-js" defer=""></script>
+<script type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/learnopencv.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/hoverIntent.min.js.下載" id="hoverIntent-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/superfish.min.js.下載" id="superfish-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/superfish.args.min.js.下載" id="superfish-args-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/skip-links.min.js.下載" id="skip-links-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/fadeup.js.下載" id="epik-fadeup-script-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend-script.js.下載" id="elementskit-framework-js-frontend-js" defer=""></script>
+<script type="text/javascript" id="elementskit-framework-js-frontend-js-after">
+		var elementskit = {
+            resturl: 'https://learnopencv.com/wp-json/elementskit/v1/',
+        }
+
+		
+</script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/widget-scripts.js.下載" id="ekit-widget-scripts-js" defer=""></script>
+<script type="text/javascript" id="cookie-notice-front-js-extra">
+/* <![CDATA[ */
+var cnArgs = {"ajaxUrl":"https:\/\/learnopencv.com\/wp-admin\/admin-ajax.php","nonce":"1abbe75865","hideEffect":"none","position":"bottom","onScroll":"0","onScrollOffset":"100","onClick":"0","cookieName":"cookie_notice_accepted","cookieTime":"31536000","cookieTimeRejected":"86400","cookiePath":"\/","cookieDomain":"","redirection":"0","cache":"1","refuse":"0","revokeCookies":"0","revokeCookiesOpt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script async="" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/front.min.js.下載" id="cookie-notice-front-js"></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/detectmobilebrowser.js.下載" id="detectmobilebrowser-js" defer=""></script>
+<script type="text/javascript" id="mystickysidebar-js-extra">
+/* <![CDATA[ */
+var mystickyside_name = {"mystickyside_string":"#genesis-sidebar-primary","mystickyside_content_string":"","mystickyside_margin_top_string":"15","mystickyside_margin_bot_string":"0","mystickyside_update_sidebar_height_string":"false","mystickyside_min_width_string":"795","device_desktop":"1","device_mobile":"1"};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/theia-sticky-sidebar.js.下載" id="mystickysidebar-js" defer=""></script>
+<script type="text/javascript" id="ivory-search-scripts-js-extra">
+/* <![CDATA[ */
+var IvorySearchVars = {"is_analytics_enabled":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/ivory-search.min.js.下載" id="ivory-search-scripts-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/wp-embed.min.js.下載" id="wp-embed-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.smartmenus.min.js.下載" id="smartmenus-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/webpack.runtime.min.js.下載" id="elementor-webpack-runtime-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend-modules.min.js.下載" id="elementor-frontend-modules-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/waypoints.min.js.下載" id="elementor-waypoints-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/core.min.js.下載" id="jquery-ui-core-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/swiper.min.js.下載" id="swiper-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/share-link.min.js.下載" id="share-link-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/dialog.min.js.下載" id="elementor-dialog-js" defer=""></script>
+<script type="text/javascript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile","value":767,"direction":"max","is_enabled":true,"default_value":767},"mobile_extra":{"label":"Mobile Extra","value":880,"direction":"max","is_enabled":false,"default_value":880},"tablet":{"label":"Tablet","value":1024,"direction":"max","is_enabled":true,"default_value":1024},"tablet_extra":{"label":"Tablet Extra","value":1365,"direction":"max","is_enabled":false,"default_value":1365},"laptop":{"label":"Laptop","value":1620,"direction":"max","is_enabled":false,"default_value":1620},"widescreen":{"label":"Widescreen","value":2400,"direction":"min","is_enabled":false,"default_value":2400}}},"version":"3.3.1","is_static":false,"experimentalFeatures":{"e_import_export":true,"landing-pages":true,"elements-color-picker":true,"admin-top-bar":true,"form-submissions":true,"video-playlist":true},"urls":{"assets":"https:\/\/learnopencv.com\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":1618,"title":"Filling%20holes%20in%20an%20image%20using%20OpenCV%20%28%20Python%20%2F%20C%2B%2B%20%29%20%7C%20LearnOpenCV%20%23","excerpt":"","featuredImage":"https:\/\/learnopencv.com\/wp-content\/uploads\/2015\/11\/imfill.jpg"}};
+</script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend.min.js(1).下載" id="elementor-frontend-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/app.js.下載" id="events_tracker_for_elementor_app-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/ResizeSensor.min.js.下載" id="jet-resize-sensor-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/sticky-sidebar.min.js.下載" id="jet-sticky-sidebar-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.jsticky.js.下載" id="jsticky-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/webpack-pro.runtime.min.js.下載" id="elementor-pro-webpack-runtime-js" defer=""></script>
+<script type="text/javascript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/learnopencv.com\/wp-admin\/admin-ajax.php","nonce":"a685754292","urls":{"assets":"https:\/\/learnopencv.com\/wp-content\/plugins\/elementor-pro\/assets\/"},"i18n":{"toc_no_headings_found":"No headings were found on this page."},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"google":{"title":"Google+","has_counter":true},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/learnopencv.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/frontend.min.js(2).下載" id="elementor-pro-frontend-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/preloaded-elements-handlers.min.js.下載" id="pro-preloaded-elements-handlers-js" defer=""></script>
+<script type="text/javascript" id="jet-sticky-frontend-js-extra">
+/* <![CDATA[ */
+var JetStickySettings = {"elements_data":{"sections":[],"columns":[]}};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jet-sticky-frontend.js.下載" id="jet-sticky-frontend-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/animate-circle.js.下載" id="animate-circle-js" defer=""></script>
+<script data-minify="1" type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/elementor.js.下載" id="elementskit-elementor-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/preloaded-modules.min.js.下載" id="preloaded-modules-js" defer=""></script>
+<script type="text/javascript" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/jquery.sticky.min.js.下載" id="e-sticky-js" defer=""></script>
+
+		<!-- Cookie Notice plugin v2.1.1 by Hu-manity.co https://hu-manity.co/ -->
+		<div id="cookie-notice" role="banner" class="cookie-revoke-hidden cn-position-bottom cn-effect-none cookie-notice-visible" aria-label="Cookie Notice" style="background-color: rgba(0,0,0,1);"><div class="cookie-notice-container" style="color: #fff;"><span id="cn-notice-text" class="cn-text-container">We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it. <a href="https://learnopencv.com/privacy-policy/" target="_blank" id="cn-more-info" class="cn-privacy-policy-link cn-link">Privacy policy</a></span><span id="cn-notice-buttons" class="cn-buttons-container"><a href="https://learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap" aria-label="Accept">Accept</a></span><a href="javascript:void(0);" id="cn-close-notice" data-cookie-set="accept" class="cn-close-icon" aria-label="Accept"></a></div>
+			
+		</div>
+		<!-- / Cookie Notice plugin --><script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/lazyload.min.js.下載"></script><script>function lazyLoadThumb(e){var t='<img loading="lazy" data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<div class="play"></div>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.dataset.query.length?'':'&'+this.dataset.query;e.setAttribute("src",t.replace("ID",this.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.replaceChild(e,this)}document.addEventListener("DOMContentLoaded",function(){var e,t,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),e.onclick=lazyLoadYoutubeIframe,a[t].appendChild(e)});</script>		<div data-elementor-type="footer" data-elementor-id="36121" class="elementor elementor-36121" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-6171d7cd elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="6171d7cd" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-26e91bf" data-id="26e91bf" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-641ce5c2 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="641ce5c2" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3459cba6" data-id="3459cba6" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4d039f4e elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="4d039f4e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<div class="elementor-heading-title elementor-size-default">Subscribe Now</div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3dfeab20" data-id="3dfeab20" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-63fd2dbe elementor-button-align-stretch elementor-widget elementor-widget-form" data-id="63fd2dbe" data-element_type="widget" data-settings="{&quot;button_width&quot;:&quot;20&quot;,&quot;step_next_label&quot;:&quot;Next&quot;,&quot;step_previous_label&quot;:&quot;Previous&quot;,&quot;step_type&quot;:&quot;number_text&quot;,&quot;step_icon_shape&quot;:&quot;circle&quot;}" data-widget_type="form.default">
+				<div class="elementor-widget-container">
+					<form class="elementor-form" method="post" name="New Form">
+			<input type="hidden" name="post_id" value="36121">
+			<input type="hidden" name="form_id" value="63fd2dbe">
+			<input type="hidden" name="referer_title" value="Filling holes in an image using OpenCV ( Python / C++ ) | LearnOpenCV #">
+
+							<input type="hidden" name="queried_id" value="1618">
+			
+			<div class="elementor-form-fields-wrapper elementor-labels-above">
+								<div class="elementor-field-type-text elementor-field-group elementor-column elementor-field-group-name elementor-col-40">
+					<input size="1" type="text" name="form_fields[name]" id="form-field-name" class="elementor-field elementor-size-sm  elementor-field-textual" placeholder="Your Name">				</div>
+								<div class="elementor-field-type-email elementor-field-group elementor-column elementor-field-group-email elementor-col-40 elementor-field-required">
+					<input size="1" type="email" name="form_fields[email]" id="form-field-email" class="elementor-field elementor-size-sm  elementor-field-textual" placeholder="Your e-mail" required="required" aria-required="true">				</div>
+								<div class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-20 e-form__buttons">
+					<button type="submit" class="elementor-button elementor-size-sm elementor-animation-grow">
+						<span>
+															<span class="elementor-align-icon-left elementor-button-icon">
+									<i aria-hidden="true" class="icon icon-right-arrow1"></i>																			<span class="elementor-screen-only">Submit</span>
+																	</span>
+																				</span>
+					</button>
+				</div>
+			</div>
+		</form>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-9b27b7f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="9b27b7f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-extended">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-34e267bc" data-id="34e267bc" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-707d320d elementor-widget elementor-widget-elementskit-heading" data-id="707d320d" data-element_type="widget" data-widget_type="elementskit-heading.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con"><div class="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-"><div class="ekit-heading--title elementskit-section-title ">
+					Disclaimer
+				</div>				<div class="ekit-heading__description">
+					<p>All views expressed on this site are my own and do not represent the opinions of OpenCV.org or any entity whatsoever with which I have been, am now, or will be affiliated.</p>
+				</div>
+			</div></div>		</div>
+				</div>
+				<div class="elementor-element elementor-element-174a6734 elementor-widget elementor-widget-elementskit-social-media" data-id="174a6734" data-element_type="widget" data-widget_type="elementskit-social-media.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con">			 <ul class="ekit_social_media">
+														<li class="elementor-repeater-item-0a2bb26">
+					    <a href="https://www.facebook.com/Learnopencv-277284889389059" target="_blank" class="square">
+														
+							<i aria-hidden="true" class="fab fa-facebook-square"></i>									
+                                                                                                            </a>
+                    </li>
+                    														<li class="elementor-repeater-item-fae44c5">
+					    <a href="https://www.instagram.com/learnopencv/" target="_blank" class="1">
+														
+							<i aria-hidden="true" class="icon icon-instagram-1"></i>									
+                                                                                                            </a>
+                    </li>
+                    														<li class="elementor-repeater-item-dbce558">
+					    <a href="https://www.linkedin.com/in/satyamallick/" target="_blank" class="linkedin">
+														
+							<i aria-hidden="true" class="fab fa-linkedin"></i>									
+                                                                                                            </a>
+                    </li>
+                    														<li class="elementor-repeater-item-b4f2d82">
+					    <a href="https://twitter.com/AiOpencv" target="_blank" class="square">
+														
+							<i aria-hidden="true" class="fab fa-twitter-square"></i>									
+                                                                                                            </a>
+                    </li>
+                    							</ul>
+		 </div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-56762500" data-id="56762500" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-1f9b3ee2 elementor-widget elementor-widget-elementskit-heading" data-id="1f9b3ee2" data-element_type="widget" data-widget_type="elementskit-heading.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con"><div class="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-"><div class="ekit-heading--title elementskit-section-title ">
+					Getting Started
+				</div></div></div>		</div>
+				</div>
+				<div class="elementor-element elementor-element-5202aa47 elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu" data-id="5202aa47" data-element_type="widget" data-settings="{&quot;layout&quot;:&quot;vertical&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;}}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-underline e--animation-fade"><ul id="menu-1-5202aa47" class="elementor-nav-menu sm-vertical" data-smartmenus-id="16296872511913032"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18894"><a class="elementor-item" href="https://learnopencv.com/category/install/" itemprop="url">Installation</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18895"><a class="elementor-item" href="https://learnopencv.com/learn-pytorch/" itemprop="url">PyTorch</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35853"><a class="elementor-item" href="https://learnopencv.com/getting-started-with-opencv/" itemprop="url">Getting Started with OpenCV</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18896"><a class="elementor-item" href="https://learnopencv.com/learn-keras-and-tensorflow/" itemprop="url">Keras &amp; Tensorflow</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18898"><a class="elementor-item" href="https://learnopencv.com/computer-vision-resources" itemprop="url">Resource Guide</a></li>
+</ul></nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true"><ul id="menu-2-5202aa47" class="elementor-nav-menu sm-vertical" data-smartmenus-id="16296872511929614"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18894"><a class="elementor-item" href="https://learnopencv.com/category/install/" itemprop="url" tabindex="-1">Installation</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18895"><a class="elementor-item" href="https://learnopencv.com/learn-pytorch/" itemprop="url" tabindex="-1">PyTorch</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35853"><a class="elementor-item" href="https://learnopencv.com/getting-started-with-opencv/" itemprop="url" tabindex="-1">Getting Started with OpenCV</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18896"><a class="elementor-item" href="https://learnopencv.com/learn-keras-and-tensorflow/" itemprop="url" tabindex="-1">Keras &amp; Tensorflow</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18898"><a class="elementor-item" href="https://learnopencv.com/computer-vision-resources" itemprop="url" tabindex="-1">Resource Guide</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-36b2e57d" data-id="36b2e57d" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-7be77d7b elementor-widget elementor-widget-elementskit-heading" data-id="7be77d7b" data-element_type="widget" data-widget_type="elementskit-heading.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con"><div class="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-"><div class="ekit-heading--title elementskit-section-title ">
+					Course
+				</div></div></div>		</div>
+				</div>
+				<div class="elementor-element elementor-element-76c544ae elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu" data-id="76c544ae" data-element_type="widget" data-settings="{&quot;layout&quot;:&quot;vertical&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;}}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-underline e--animation-fade"><ul id="menu-1-76c544ae" class="elementor-nav-menu sm-vertical" data-smartmenus-id="16296872511944185"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18903"><a class="elementor-item" href="https://learnopencv.com/official-opencv-courses/" itemprop="url">Opencv Courses</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18902"><a class="elementor-item" href="https://courses.learnopencv.com/" itemprop="url">CV4Faces (Old)</a></li>
+</ul></nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true"><ul id="menu-2-76c544ae" class="elementor-nav-menu sm-vertical" data-smartmenus-id="1629687251194116"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18903"><a class="elementor-item" href="https://learnopencv.com/official-opencv-courses/" itemprop="url" tabindex="-1">Opencv Courses</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18902"><a class="elementor-item" href="https://courses.learnopencv.com/" itemprop="url" tabindex="-1">CV4Faces (Old)</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-34f5c545" data-id="34f5c545" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-6a16225b elementor-widget elementor-widget-elementskit-heading" data-id="6a16225b" data-element_type="widget" data-widget_type="elementskit-heading.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con"><div class="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-"><div class="ekit-heading--title elementskit-section-title ">
+					Information
+				</div></div></div>		</div>
+				</div>
+				<div class="elementor-element elementor-element-9b5012 elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu" data-id="9b5012" data-element_type="widget" data-settings="{&quot;layout&quot;:&quot;vertical&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;}}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-underline e--animation-fade"><ul id="menu-1-9b5012" class="elementor-nav-menu sm-vertical" data-smartmenus-id="16296872511961602"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35854"><a class="elementor-item" href="https://learnopencv.com/privacy-policy/" itemprop="url">Privacy Policy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35855"><a class="elementor-item" href="https://learnopencv.com/terms-and-conditions/" itemprop="url">Terms and Conditions</a></li>
+</ul></nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true"><ul id="menu-2-9b5012" class="elementor-nav-menu sm-vertical" data-smartmenus-id="16296872511963906"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35854"><a class="elementor-item" href="https://learnopencv.com/privacy-policy/" itemprop="url" tabindex="-1">Privacy Policy</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35855"><a class="elementor-item" href="https://learnopencv.com/terms-and-conditions/" itemprop="url" tabindex="-1">Terms and Conditions</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-713ca536" data-id="713ca536" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-6e6dbc2 elementor-widget elementor-widget-elementskit-heading" data-id="6e6dbc2" data-element_type="widget" data-widget_type="elementskit-heading.default">
+				<div class="elementor-widget-container">
+			<div class="ekit-wid-con"><div class="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-"><div class="ekit-heading--title elementskit-section-title ">
+					About LearnOpenCV
+				</div>				<div class="ekit-heading__description">
+					<p>In 2007, right after finishing my Ph.D., I co-founded TAAZ Inc. with my advisor Dr. David Kriegman and Kevin Barnes. The scalability, and robustness of our computer vision and machine learning algorithms have been put to rigorous test by more than 100M users who have tried our products. </p>
+				</div>
+			</div></div>		</div>
+				</div>
+				<div class="elementor-element elementor-element-21d7c6c0 elementor-widget elementor-widget-button" data-id="21d7c6c0" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="https://learnopencv.com/about/" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">Read More</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-f25ae2c elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="f25ae2c" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-46a5ee7c" data-id="46a5ee7c" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-72a41f8f elementor-widget elementor-widget-text-editor" data-id="72a41f8f" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+					<div>Copyright © 2021 – BIG VISION LLC</div>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+		
+
+<script>window.addEventListener('DOMContentLoaded', function() {
+	jQuery('.entry-header .entry-meta').html(jQuery('.entry-header .entry-meta').html().replace('By', ''));
+	jQuery(window).on('load', function() {
+    	setTimeout(function(){
+        jQuery('#tpbr_topbar').fadeIn(500);
+    	}, 3000);
+	});
+	
+	
+
+});</script>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1629671369 --><span id="elementor-device-mode" class="elementor-screen-only"></span><div style="position: absolute; inset: 0px; z-index: 2147483646; background: black; width: 100%; opacity: 0.5; display: none; height: 5801px;"></div><iframe src="./Filling holes in an image using OpenCV ( Python _ C++ ) _ LearnOpenCV #_files/saved_resource.html" style="position: absolute; left: 0px; top: 0px; width: 100%; display: none; border: none; z-index: 2147483647; height: 881px;"></iframe></body></html>
