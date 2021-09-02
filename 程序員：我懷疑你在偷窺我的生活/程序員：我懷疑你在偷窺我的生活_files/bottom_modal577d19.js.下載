@@ -1,0 +1,767 @@
+define("sougou/a_tpl.html.js",[],function(){
+return'<h3 class="rich_media_area_title">相关文章</h3>\n<ul class="relate_article_list">\n    <# for(var i in list){#>\n    <li class="relate_article_item">\n        <a class="relate_article_link sg_link" href="<#=list[i].url#>" target="_blank"><#=list[i].title#></a>\n    </li>\n    <#}#>\n</ul>\n';
+});define("biz_common/utils/report.js",[],function(){
+"use strict";
+return function(n){
+var e=new Image;
+e.src=n;
+};
+});define("appmsg/articleReport.js",["biz_common/utils/string/html.js","biz_common/dom/event.js","biz_wap/utils/mmversion.js"],function(i){
+"use strict";
+function n(i){
+i.dom&&(i.dom.style.display="",t.tap(i.dom,function(){
+var n=["https://mp.weixin.qq.com/mp/infringement?url=",encodeURIComponent(i.link.htmlDecode()),"&title=",encodeURIComponent(i.title),"&__biz=",window.biz].join("");
+return location.href=n+"#wechat_redirect",!1;
+}));
+}
+i("biz_common/utils/string/html.js");
+{
+var t=i("biz_common/dom/event.js"),e=i("biz_wap/utils/mmversion.js");
+({
+not_in_mm:!e.isWp&&-1==navigator.userAgent.indexOf("MicroMessenger")
+});
+}
+return{
+init:n
+};
+});define("appmsg/topic_tpl.html.js",[],function(){
+return'<span class="db topic_wrp">\n    <span class="topic_thumb" style="background-image:url({img_url});"></span>\n    <span class="topic_content">\n        <strong class="topic_title">{title}</strong>\n        <span class="topic_desc">{author}</span>\n        <span class="topic_info">\n            <span class="topic_info_extra"><span class="icon_topic"></span>话题</span>\n            <span class="topic_info_primary">相关文章{msg_num}篇</span>\n        </span>\n    </span>\n</span>\n';
+});define("appmsg/appmsg_live_tpl.html.js",[],function(){
+return'<# if (liveDeleted) { #>\n  <!--直播 已被删除-->\n  <div class="appmsg__live appmsg__live__unusual">直播间已被删除</div>\n<# } else { #>\n  <div class="appmsg__live">\n    <div class="appmsg__live__inner">\n      <div class="appmsg__live__main">\n        <div class="appmsg__live__cover__image" style="background: #FFF url(<#=cover#>) no-repeat center top / cover"></div>\n        <div class="appmsg__live__status__area">\n          <!--未开播-->\n          <div class="appmsg__live__status">\n            <div class="appmsg__live__status__tag"><#=tagStatusWord#></div><span class="appmsg__live__status__info"><#=statusInfoWord#></span>\n          </div>\n        </div>\n        <div class="appmsg__live__like-area js_live_like-area">\n          <# if (isInLive) { #>\n            <div class="appmsg__live__like-animation js_live_like-animation"></div>\n          <# } #>\n          <div class="appmsg__live__like-icon">\n            <div class="person-operation__item__inner mode-filter-black">\n              <div class="appmsg__live__like-icon__image"></div>\n            </div>\n          </div>\n          <div class="appmsg__live__like-info"><#=likeCount#></div>\n        </div>\n      </div>\n      <div class="appmsg__live__extend">\n        <div class="appmsg__live__extend__main">\n          <p class="appmsg__live__title"><#=title#></p>\n          <p class="appmsg__live__desc"><#=desc#></p>\n        </div>\n        <# if (showEntryBtn) { #>\n          <a href="javascript:;" class="appmsg__live__extend__button"><#=btnStatusWord#></a>\n        <# } #>\n      </div>\n    </div>\n  </div>\n<# } #>\n';
+});define("appmsg/profile/ban_alert_tpl.html.js",[],function(){
+return'<div id="js_profile_ban" style="display: none;">\n    <div class="weui-mask_transparent"></div>\n    <div class="weui-toast">\n        <i class="weui-icon-warn weui-icon_toast"></i>\n        <p class="weui-toast__content">该账号因违规无法跳转</p>\n    </div>\n</div>';
+});define("appmsg/profile/mp_profile_tpl.html.js",[],function(){
+return' <!-- profile卡片 -->\n<div class="appmsg_card_context wx_profile_card js_wx_profile_card" data-id="<#=id#>" data-isban="<#=isban#>" data-index="<#=index#>">\n  <div class="wx_profile_card_bd">\n    <div class="wx_profile weui-flex">\n      <div class="wx_profile_hd">\n        <# if(round_head_img) { #>\n        <img class="wx_profile_avatar" src="<#=round_head_img#>" alt="<#=nickname#>">\n        <# } else {#>\n        <img class="wx_profile_avatar" src="http://mmbiz.qpic.cn/mmbiz/a5icZrUmbV8p5jb6RZ8aYfjfS2AVle8URwBt8QIu6XbGewB9wiaWYWkPwq4R7pfdsFibuLkic16UcxDSNYtB8HnC1Q/0" alt="<#=nickname#>">\n        <# } #>\n      </div>\n      <div class="wx_profile_bd weui-flex weui-flex__item">\n        <div class="weui-flex__item">\n          <strong class="wx_profile_nickname">\n              <#  if(nickname) { #>\n                <#=nickname#>\n\n              <# } else { #>\n                <#=alias#>\n              <#}#>\n          </strong>\n          <div class="wx_profile_desc"><#=signature#></div>\n          <div class="wx_profile_tips" id="js_profile_desc">\n            <span class="wx_profile_tips_meta" id="js_profile_article" <#if (original_num === 0){ #> style="display:none" <# } #>><#=original_num#>篇原创内容</span>\n            <!-- <span class="wx_profile_tips_meta" id="js_profile_friends"></span> -->\n          </div>\n        </div>\n        <i class="weui-icon-arrow"></i>\n      </div>\n    </div>\n  </div>\n  <div class="wx_profile_card_ft">公众号</div>\n</div>\n';
+});define("appmsg/channel/report_live.js",["common/comm_report.js"],function(n){
+"use strict";
+var e=n("common/comm_report.js"),o=function(n,o,i,t){
+var r=0;
+try{
+r=1*window.atob(window.biz);
+}catch(w){}
+e.report(22035,{
+BizUin:r,
+AppMsgID:window.parseInt(window.mid,10)||0,
+ItemIndex:window.parseInt(window.idx,10)||0,
+Scene:window.parseInt(window.scene,10)||0,
+Enterid:window.parseInt(window.enterid,10)||0,
+Action:n,
+Status:t||"",
+ActionTS:Math.ceil(Date.now()/1e3),
+Noticeid:o||"",
+Username:i||""
+});
+};
+return{
+report:o
+};
+});define("appmsg/channel/time_format.js",[],function(){
+"use strict";
+var e=function(e){
+var t=e+"";
+return t.length>=2?t:"0"+t;
+},t=function(t){
+var a=new Date(1e3*t);
+return a.getFullYear()<=(new Date).getFullYear()?e(a.getMonth()+1)+"月"+e(a.getDate())+"日 "+e(a.getHours())+":"+e(a.getMinutes()):a.getFullYear()+"年"+e(a.getMonth()+1)+"月"+e(a.getDate())+"日 "+e(a.getHours())+":"+e(a.getMinutes());
+},a=function(e,t){
+var a=void 0;
+switch(e=parseInt(e,10),t=parseInt(t,10),e){
+case 0:
+a=0===t?"预约":"已预约";
+break;
+
+case 1:
+a="已失效";
+break;
+
+case 2:
+a="观看";
+break;
+
+case 3:
+a="已结束";
+break;
+
+default:
+a="预约";
+}
+return a;
+},r=function(e,a){
+var r=void 0;
+switch(a=parseInt(a,10)){
+case 0:
+r="将在"+t(e)+" 直播";
+break;
+
+case 1:
+case 3:
+r=t(e)+" 直播";
+break;
+
+case 2:
+r="正在直播";
+break;
+
+default:
+r="正在直播";
+}
+return r;
+};
+return{
+getFullTime:t,
+getStatusWording:a,
+getStatusDesc:r
+};
+});define("appmsg/channel/video_snap_tpl.html.js",[],function(){
+return'<# if(snapType === \'video\'){ #>\n<div class="wxw_wechannel_card appmsg_card_context js_wechannel_video_card js_wechannel_video_context">\n  <div class="wxw_wechannel_card_bd">\n    <div class="wxw_wechannel_video_context" style="background-image:url(<#=url#>)">\n      <i class="weui-play-btn_primary"></i>\n    </div>\n    <div class="wxw_wechannel_profile weui-flex">\n      <# if(headImgUrl){ #>\n      <img class="wxw_wechannel_avatar" src="<#=headImgUrl#>" data-disable-preview="1">\n      <# }else{ #>\n      <img class="wxw_wechannel_avatar" src="http://mmbiz.qpic.cn/mmbiz/a5icZrUmbV8p5jb6RZ8aYfjfS2AVle8URwBt8QIu6XbGewB9wiaWYWkPwq4R7pfdsFibuLkic16UcxDSNYtB8HnC1Q/0" data-disable-preview="1">\n      <# } #>\n      <strong class="wxw_wechannel_nickname"><#=nickname#></strong>\n    </div>\n    <# if(desc){ #>\n    <div class="wxw_wechannel_desc">\n      <#=desc#>\n    </div>\n    <# } #>\n    <!-- 不可引用时show出来即可 -->\n    <# if(flag === 1){ #>\n    <div class="wxw_wechannel_msg">\n      该视频号动态已删除    </div>\n    <# } else if (flag === 2) { #>\n      <div class="wxw_wechannel_msg">\n        无法浏览该视频号动态      </div>\n    <# } #>\n  </div>\n  <div class="wxw_wechannel_card_ft weui-flex">\n    <i class="wxw_wechannel_logo"></i>视频号  </div>\n</div>\n<# } else if (snapType === \'image\'){  #>\n<div class="wxw_wechannel_card appmsg_card_context js_wechannel_img_card js_wechannel_img_context">\n  <div class="wxw_wechannel_card_bd">\n    <div class="wxw_wechannel_img_context">\n        <ul class="wxw_wechannel_img_list js_wechannel_img_list" id="js_wechannel_img_list" data-poster-src="<#=url#>" data-disable-preview="1">\n            <li class="wxw_wechannel_img js_wechannel_img" data-w="1000" data-ratio="1" style="background-image:url(<#=url#>)" data-disable-preview="1"></li>\n        </ul>\n        <ul class="wxw_wechannel_img_navs js_wechannel_img_navs">\n          <# for(var i = 0; i < imgCount; i++){ #>\n            <li class="wxw_wechannel_img_nav <# if(i === 0){ #>  wxw_wechannel_img_nav_current <# } #> "></li>\n          <# } #>\n        </ul>\n    </div>\n    <div class="wxw_wechannel_profile weui-flex">\n      <# if(headImgUrl){ #>\n        <img class="wxw_wechannel_avatar" src="<#=headImgUrl#>" data-disable-preview="1">\n        <# }else{ #>\n        <img class="wxw_wechannel_avatar" src="http://mmbiz.qpic.cn/mmbiz/a5icZrUmbV8p5jb6RZ8aYfjfS2AVle8URwBt8QIu6XbGewB9wiaWYWkPwq4R7pfdsFibuLkic16UcxDSNYtB8HnC1Q/0" data-disable-preview="1">\n        <# } #>\n      <strong class="wxw_wechannel_nickname"><#=nickname#></strong>\n    </div>\n    <# if(desc){ #>\n    <div class="wxw_wechannel_desc">\n      <#=desc#>\n    </div>\n    <# } #>\n    <# if(flag === 1){ #>\n      <div class="wxw_wechannel_msg">\n        该视频号动态已删除      </div>\n    <# } else if (flag === 2) { #>\n      <div class="wxw_wechannel_msg">\n        无法浏览该视频号动态      </div>\n    <# } #>\n  </div>\n  <div class="wxw_wechannel_card_ft weui-flex">\n    <i class="wxw_wechannel_logo"></i>视频号  </div>\n</div>\n<# } else if (snapType === \'live\') { #>\n<div class="wxw_wechannel_card appmsg_card_context wxw_wechannel_card_live js_wechannel_live_card" data-noticeid="<#=noticeid#>" data-username="<#=username#>">\n  <div class="wxw_wechannel_card_bd">\n    <div class="wxw_wechannel_live_context weui-flex">\n      <div class="wxw_wechannel_live_hd">\n        <img class="wxw_wechannel_live_avatar" src="<#=headImgUrl#>" alt="">\n      </div>\n      <div class="wxw_wechannel_live_bd weui-flex__item">\n        <strong class="wxw_wechannel_live_nickname"><#=nickname#></strong>\n        <div class="wxw_wechannel_live_desc js_wechannel_live_desc"><#=desc#></div>\n      </div>\n      <div class="wxw_wechannel_live_ft js_wechannel_operation_area">\n        <button class="weui-btn weui-btn_mini wxw_wechannel_live_btn js_channel_btn_operation <# if((status !== 0 && status !== 2)|| reservation === 1){ #>weui-btn_disabled<# } #>" data-reservation="<#=reservation#>" data-noticeid="<#=noticeid#>" data-username="<#=username#>" data-status="<#=status#>" type="button">\n          <i class="icon_wxw_wechannel_live js_wechannnel_live" <#if (status !== 2){ #> style="display:none" <# } #>></i>\n          <span class="js_channel_btn_operation_wording"><#=liveWording#></span>\n        </button>\n      </div>\n    </div>\n    <# if (flag === 1) { #>\n      <div class="wxw_wechannel_msg">\n        无法浏览该视频号动态      </div>\n    <# } #>\n  </div>\n  <div class="wxw_wechannel_card_ft weui-flex">\n    <i class="wxw_wechannel_logo"></i>视频号  </div>\n</div>\n<# } #>\n';
+});define("appmsg/appmsg_card.js",["biz_common/dom/event.js"],function(t){
+"use strict";
+function a(t,a){
+var n=a?t.querySelector(a):t;
+c.on(t,"touchstart",function(c){
+var o=c.target;
+a&&n.contains(o)||t.classList.add("appmsg_card_custom_active");
+}),c.on(t,"touchend",function(c){
+var o=c.target;
+a&&n.contains(o)||t.classList.remove("appmsg_card_custom_active");
+});
+}
+var c=t("biz_common/dom/event.js");
+return{
+addAppmsgCardTouchEvent:a
+};
+});define("biz_common/dom/offset.js",[],function(){
+"use strict";
+function f(f){
+if(!f)return{};
+for(var t=0,e=0,o=parseInt(document.body.style.marginTop,10)||0;f.offsetParent;)t+=f.offsetTop,
+e+=f.offsetLeft,f=f.offsetParent;
+return{
+offsetTop:t>o?t-o:t,
+offsetLeft:e
+};
+}
+return{
+getOffset:f
+};
+});define("appmsg/emotion/dom.js",["biz_common/dom/event.js"],function(t){
+"use strict";
+function e(t){
+if("string"==typeof t){
+document.querySelectorAll||!function(){
+var t=document.createStyleSheet(),e=function(e,n){
+var i,o=document.all,r=o.length,u=[];
+for(t.addRule(e,"foo:bar"),i=0;r>i&&!("bar"===o[i].currentStyle.foo&&(u.push(o[i]),
+u.length>n));i+=1);
+return t.removeRule(0),u;
+};
+document.querySelectorAll=function(t){
+return e(t,1/0);
+};
+}();
+var e=document.querySelectorAll(t);
+}else e=[t];
+return{
+el:e,
+on:function(t,e){
+return this.each(function(n){
+i.on(n,t,e);
+}),this;
+},
+hide:function(){
+return this.each(function(t){
+t.style.display="none";
+}),this;
+},
+show:function(){
+return this.each(function(t){
+t.style.display="block";
+}),this;
+},
+each:function(t){
+return n(this.el,t),this;
+},
+width:function(){
+return this.el[0].clientWidth;
+},
+css:function(t){
+return this.each(function(e){
+for(var n in t)e.style[n]=t[n];
+}),this;
+},
+attr:function(t,e){
+var n=this.el[0];
+return e?(n.setAttribute(t,e),this):n.getAttribute(t);
+},
+append:function(t){
+return t.el&&(t=t.el[0]),this.el[0].appendChild(t),this;
+},
+html:function(t){
+this.each(function(e){
+e.innerHTML=t;
+});
+}
+};
+}
+function n(t,e){
+for(var n=0,i=t.length;i>n;n++)e(t[n],n);
+}
+var i=t("biz_common/dom/event.js");
+return e.el=function(t){
+return document.createElement(t);
+},e.later=function(t){
+setTimeout(t,3);
+},e.log=function(){},e.each=n,e;
+});function _classCallCheck(t,e){
+if(!(t instanceof e))throw new TypeError("Cannot call a class as a function");
+}
+var _createClass=function(){
+function t(t,e){
+for(var n=0;n<e.length;n++){
+var i=e[n];
+i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i);
+}
+}
+return function(e,n,i){
+return n&&t(e.prototype,n),i&&t(e,i),e;
+};
+}();
+define("appmsg/emotion/emotion.js",["biz_common/utils/string/html.js","appmsg/emotion/dom.js","appmsg/emotion/slide.js","appmsg/emotion/common.js","appmsg/emotion/nav.js","appmsg/emotion/textarea.js","biz_common/utils/emoji_data.js","biz_common/utils/emoji_panel_data.js","biz_common/dom/class.js","biz_common/tmpl.js","appmsg/emotion/emotion.html.js"],function(t){
+"use strict";
+function e(t){
+var e=l.filter(function(e){
+for(var n=0;n<f.length;n++){
+var i=f[n];
+if(e[i]){
+var o=new RegExp(e[i].replace("[","\\[").replace("]","\\]"),"g"),a=t.match(o);
+if(a)return!0;
+}
+}
+return!1;
+});
+return e&&e.length>0?e[0]:null;
+}
+function n(t){
+for(var n=[],o=0;o<l.length;o++){
+for(var a=l[o],s=0;s<f.length;s++){
+var r=f[s];
+if(a[r]){
+var m=new RegExp(a[r].replace("[","\\[").replace("]","\\]"),"g"),c=t.match(m);
+if(c){
+n=n.concat(c);
+continue;
+}
+}
+}
+if(a.emoji){
+var m=new RegExp(a.emoji,"g"),c=t.match(m);
+c&&(n=n.concat(c));
+}
+}
+return i.each(n,function(n){
+var i=void 0;
+if(void 0!==d[n]){
+var o=d[n],a=v[o];
+i='<i class="icon_emotion_single '+a+'"></i>',t=t.replace(n,i);
+}else{
+var s=e(n);
+s&&s.style&&(i='<i class="icon_emotion_single '+s.style+'"></i>',t=t.replace(n,i));
+}
+}),t;
+}
+t("biz_common/utils/string/html.js");
+for(var i=t("appmsg/emotion/dom.js"),o=t("appmsg/emotion/slide.js"),a=t("appmsg/emotion/common.js"),s=t("appmsg/emotion/nav.js"),r=t("appmsg/emotion/textarea.js"),l=t("biz_common/utils/emoji_data.js"),m=t("biz_common/utils/emoji_panel_data.js"),c=t("biz_common/dom/class.js"),h=t("biz_common/tmpl.js"),p=t("appmsg/emotion/emotion.html.js"),u={},d={},v=[],f=["cn","us","hk"],g=15,_=a.EMOTIONS_COUNT,j=a.EMOTION_LI_SIZE,w=0;w<l.length;w++){
+var C=l[w];
+u[C.id]=C;
+}
+for(var w=0;w<m.length;w++){
+var C=u[m[w]];
+if(d[C.cn]=w,C.us&&(d[C.us]=w),C.hk&&(d[C.hk]=w),C.emoji&&(d[C.emoji]=w),C.code){
+d[C.code]=w;
+var b=C.code.htmlEncodeLite();
+C.code!==b&&(d[b]=w);
+}
+v.push(C.style);
+}
+var E=function(){
+function t(e){
+_classCallCheck(this,t),this.opt=e,this.pannel=e.emotionPanel,this.isPannelShow=!1,
+this.navs=[],this.listenTogglePannel(),this.buildEmotions(e),this.slide=new o({
+emotionSlideWrapper:e.emotionSlideWrapper,
+commonWidth:this.width,
+pageCount:this.pageCount,
+wrapperWidth:this.wrapperWidth,
+navs:this.navs
+}),s.activeNav(0,this.navs),this.listenClickOnEmotion(),this.textarea=new r({
+inputArea:this.opt.inputArea,
+submitBtn:this.opt.submitBtn
+});
+}
+return _createClass(t,[{
+key:"listenTogglePannel",
+value:function(){
+var t=this,e=this.opt.inputArea,n=e.el[0],o=this.opt.emotionPanelArrowWrp,a=this.opt.emotionSwitcher,s="emotion_switch_current";
+this.pannel.hide();
+var r=function(){
+o.show(),t.pannel.show(),n.blur(),i.later(function(){
+n.blur();
+});
+},l=function(){
+o.hide(),t.pannel.hide(),n.focus(),i.later(function(){
+n.focus();
+});
+};
+a.on("tap",function(e){
+e.preventDefault(),e.stopPropagation(),t.isPannelShow=!t.isPannelShow,t.isPannelShow?(r(),
+a.each(function(t){
+c.addClass(t,s);
+})):(l(),a.each(function(t){
+c.removeClass(t,s);
+}));
+}),e.on("tap",function(){
+t.pannel.hide(),t.isPannelShow=!1;
+});
+}
+},{
+key:"setOuterDivWidth",
+value:function(){
+this.wrapperWidth=this.pageCount*this.width,this.opt.emotionSlideWrapper.css({
+width:this.wrapperWidth+"px"
+});
+}
+},{
+key:"generateEmotionListAndAppend",
+value:function(){
+this.opt.emotionSlideWrapper.el[0].insertAdjacentHTML("beforeend",h.tmpl(p,{
+pageCount:this.pageCount,
+onePageCount:this.emotionsCountOnePage,
+emotionsCount:_,
+emotionSize:a.EMOTION_SIZE,
+emotionLiSize:j,
+width:this.width,
+gap:(this.width-this.emotionsOneLine*j)/2
+},!1));
+}
+},{
+key:"getPageCount",
+value:function(){
+var t=this.width-2*g;
+this.emotionsOneLine=parseInt(t/j,10),this.emotionsCountOnePage=3*this.emotionsOneLine-1;
+var e=parseInt(_/this.emotionsCountOnePage,10);
+return _%this.emotionsCountOnePage!==0&&e++,e;
+}
+},{
+key:"genrateNavs",
+value:function(){
+for(var t=0,e=this.pageCount;e>t;t++){
+var n=i(i.el("li"));
+n.attr("class","emotion_nav js_emotion_nav"),this.navs.push(n),this.opt.emotionNavBar.append(n);
+}
+}
+},{
+key:"buildEmotions",
+value:function(){
+this.width=window.innerWidth||document.body.clientWidth,this.pageCount=this.getPageCount(),
+this.setOuterDivWidth(),this.generateEmotionListAndAppend(),this.genrateNavs();
+}
+},{
+key:"hidePannel",
+value:function(){
+this.pannel.hide();
+}
+},{
+key:"addEmotion",
+value:function(t){
+if(!this.slide.isMoved){
+var e=i(t.currentTarget),n=+e.attr("data-index");
+this.textarea.inputEmotion(n),this.opt.inputEmotion&&this.opt.inputEmotion();
+}
+}
+},{
+key:"listenClickOnEmotion",
+value:function(){
+i("li.js_emotion_item").on("click",this.addEmotion.bind(this)),i("li.js_emotion_item").on("touchend",this.addEmotion.bind(this));
+}
+}]),t;
+}();
+return{
+Emotion:E,
+encode:function(t){
+t=n(t);
+var e=/\/([\u4e00-\u9fa5\w]{1,4})/g,o=t.match(e);
+return o&&i.each(o,function(e){
+var n=e.replace("/",""),o=[n.slice(0,4),n.slice(0,3),n.slice(0,2),n.slice(0,1)];
+i.each(o,function(e){
+if(void 0!==d["["+e+"]"]){
+var n=d["["+e+"]"],i=v[n],o='<i class="icon_emotion_single '+i+'"></i>';
+t=t.replace("/"+e,o);
+}
+});
+}),e=/\/(:[^\/]{1,8})/g,o=t.match(e),o&&i.each(o,function(e){
+for(var n=[],o=2;o<e.length+1;o++)n.push(e.slice(0,o));
+i.each(n,function(e){
+if(void 0!==d[e]){
+var n=d[e],i=v[n],o='<i class="icon_emotion_single '+i+'"></i>';
+t=t.replace(e,o);
+}
+});
+}),t;
+}
+};
+});function _typeof(t){
+return t&&"undefined"!=typeof Symbol&&t.constructor===Symbol?"symbol":typeof t;
+}
+function _classCallCheck(t,e){
+if(!(t instanceof e))throw new TypeError("Cannot call a class as a function");
+}
+var _extends=Object.assign||function(t){
+for(var e=1;e<arguments.length;e++){
+var o=arguments[e];
+for(var n in o)Object.prototype.hasOwnProperty.call(o,n)&&(t[n]=o[n]);
+}
+return t;
+},_createClass=function(){
+function t(t,e){
+for(var o=0;o<e.length;o++){
+var n=e[o];
+n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);
+}
+}
+return function(e,o,n){
+return o&&t(e.prototype,o),n&&t(e,n),e;
+};
+}();
+define("pages/mod/bottom_modal.js",["https://res.wx.qq.com/open/libs/weui/2.4.4/weui.min.css","widget/wx-widget/wx_bottom_modal.css","pages/mod/bottom_modal.html.js","biz_common/tmpl.js","biz_common/dom/class.js","biz_common/dom/event.js","biz_wap/utils/device.js","common/navShadow.js","biz_wap/jsapi/core.js"],function(t){
+"use strict";
+function e(t,e,o,n){
+o=n?o+"px":o,t.style[e]=o;
+}
+function o(t){
+return Math.ceil(t.scrollTop+t.offsetHeight)>=t.scrollHeight;
+}
+t("https://res.wx.qq.com/open/libs/weui/2.4.4/weui.min.css"),t("widget/wx-widget/wx_bottom_modal.css");
+var n=t("pages/mod/bottom_modal.html.js"),i=t("biz_common/tmpl.js"),s=t("biz_common/dom/class.js"),a=t("biz_common/dom/event.js"),r=t("biz_wap/utils/device.js"),l=t("common/navShadow.js"),c=t("biz_wap/jsapi/core.js"),h=100,u="weui-btn_disabled",p={
+top:r.os.pc?"20%":screen.height/4-(screen.height-window.innerHeight)+"px",
+btnText:"提交",
+hasHeader:!0,
+clickMask2Hide:!0,
+animationType:"bottom"
+},m=function(){
+function t(o){
+var s=arguments.length<=1||void 0===arguments[1]?{}:arguments[1];
+_classCallCheck(this,t),s=_extends({},p,s);
+var a=document.createElement("div");
+a.innerHTML=i.tmpl(n,{
+hasBtn:s.hasBtn,
+btnText:s.btnText,
+extClass:s.extClass||"",
+hasMask:!s.removeMask,
+isTopic:!!s.isTopic,
+hasHeader:s.hasHeader,
+hasFooter:!!s.footerEl,
+btnSlot:s.btnSlot
+});
+var r=a.firstChild;
+this.scrollLock=!1,this.curScrollTop=0,this.touches={
+startX:0,
+startY:0,
+curX:0,
+curY:0,
+isScreenLeft:!1,
+direction:"",
+times:0
+},this.opt=s,this.rootEle=r,this.contentEle=o,this.contentAreaWrp=r.getElementsByClassName("js_bottom_modal_bd")[0],
+this.contentAreaWrp.appendChild(o),this.contentArea=r.getElementsByClassName("js_bottom_modal_content")[0],
+this.loading=this.rootEle.getElementsByClassName("js_modal_loading")[0],this.pullLoading=this.rootEle.getElementsByClassName("js_pull_loading")[0],
+this.endLine=this.rootEle.getElementsByClassName("js_modal_end_line")[0],this.enableGesture=!1,
+s.removeMask||(this.maskEle=r.getElementsByClassName("js_bottom_modal_mask")[0],
+this.maskNotClick=r.getElementsByClassName("js_bottom_modal_mask_not_click")[0],
+s.transparentMask&&e(this.maskEle,"opacity",0)),s.hasHeader&&(this.headAreaWrp=r.getElementsByClassName("js_bottom_modal_hd")[0],
+this.submitBtn=this.headAreaWrp.getElementsByClassName("js_submit_bottom_modal")[0],
+this.closeBtn=this.headAreaWrp.getElementsByClassName("js_close_bottom_modal")[0],
+this.setTitle(s.title)),s.footerEl&&(this.footAreaWrp=r.querySelector(".js_bottom_modal_ft"),
+this.footAreaWrp.appendChild(s.footerEl)),"right"===s.animationType&&this.rootEle.classList.add("wx_bottom_modal_right"),
+document.body.appendChild(r),s.cb&&s.cb(),this.bindEvent();
+}
+return _createClass(t,[{
+key:"bindEvent",
+value:function(){
+var t=this;
+this.maskEle&&(this.opt.clickMask2Hide&&a.tap(this.maskEle,function(){
+t.hide();
+}),a.on(this.contentArea,"transitionend",function(o){
+o.target===t.contentArea&&("bottom"===t.opt.animationType&&"top"===o.propertyName||"right"===t.opt.animationType&&("transform"===o.propertyName||"-ms-transform"===o.propertyName)?t.getShowStatus()?"function"==typeof t.opt.onShowAfterAnimation&&t.opt.onShowAfterAnimation():(e(t.maskNotClick,"visibility","hidden"),
+t.contentArea.removeAttribute("style")):("transform"===o.propertyName||"-ms-transform"===o.propertyName)&&(t.contentArea.style.removeProperty("transition"),
+t.contentArea.style.removeProperty("transform")));
+}),a.tap(this.maskNotClick,function(){
+return setTimeout(function(){
+t.hide(),e(t.maskNotClick,"visibility","hidden"),t.contentArea.removeAttribute("style");
+},300);
+}),a.on(this.maskEle,"touchmove",function(t){
+t.preventDefault();
+})),this.headAreaWrp&&(a.on(this.headAreaWrp,"touchstart",function(e){
+return t.onTouchStart(e);
+}),a.on(this.headAreaWrp,"touchmove",function(e){
+e.preventDefault();
+var o=e.changedTouches[0];
+t.getTouchDirection(o)&&t.moveByDirection(o);
+}),a.on(this.headAreaWrp,"touchend",function(e){
+return t.onTouchEnd(e);
+})),this.footAreaWrp&&(a.on(this.footAreaWrp,"touchstart",function(e){
+return t.onTouchStart(e);
+}),a.on(this.footAreaWrp,"touchmove",function(e){
+e.preventDefault();
+var o=e.changedTouches[0];
+t.getTouchDirection(o)&&t.moveByDirection(o);
+}),a.on(this.footAreaWrp,"touchend",function(e){
+return t.onTouchEnd(e);
+})),this.closeBtn&&a.on(this.closeBtn,"click",function(){
+t.hide();
+}),this.submitBtn&&a.on(this.submitBtn,"click",function(){
+s.hasClass(t.submitBtn,u)||t.opt.btnClickCb&&t.opt.btnClickCb();
+}),a.on(this.contentAreaWrp,"scroll",function(){
+t.checkReachBoundary();
+}),this.headAreaWrp&&a.tap(this.headAreaWrp.getElementsByClassName("js_bottom_modal_title")[0],function(){
+t.opt.titleClickCb&&t.opt.titleClickCb();
+}),a.on(this.contentAreaWrp,"touchstart",function(e){
+return t.onTouchStart(e);
+}),a.on(this.contentAreaWrp,"touchmove",function(e){
+var n=e.changedTouches[0];
+if(t.getTouchDirection(n)){
+var i=t.touches.direction;
+if("Y"===i){
+var s=t.contentAreaWrp,a=n.pageY,r=a-t.touches.startY,l=s.scrollTop<=0&&r>0,c=o(s)&&0>r;
+if(l||c)if(t.opt.innerScrollList&&t.opt.innerScrollList.length){
+for(var h=0;h<t.opt.innerScrollList.length;h++){
+var u=t.opt.innerScrollList[h];
+if(n.target===u&&(0!==u.scrollTop&&l||!o(u)&&c))return;
+}
+e.preventDefault();
+}else e.preventDefault(),c&&!t.pullingUpLock?(t.opt.onPullUpLoad&&t.opt.onPullUpLoad(),
+t.pullingUpLock=!0):l&&(t.opt.onPullDownLoad?t.pullingDownLock||(t.opt.onPullDownLoad&&t.opt.onPullDownLoad(),
+t.pullingDownLock=!0):t.move(a));else t.resetMovement();
+t.touches.curY=a;
+}else e.preventDefault(),t.moveByDirection(n);
+}
+}),a.on(this.contentAreaWrp,"touchend",function(e){
+return t.onTouchEnd(e);
+});
+}
+},{
+key:"checkReachBoundary",
+value:function(){
+var t=this,e=arguments.length<=0||void 0===arguments[0]?!0:arguments[0],o=arguments.length<=1||void 0===arguments[1]?!0:arguments[1];
+this.scrollLock&&0!==this.contentAreaWrp.scrollTop||(this.scrollLock=!0,setTimeout(function(){
+t.scrollLock=!1;
+},50),e&&!this.pullingDownLock&&this.contentAreaWrp.scrollTop<=0&&(this.opt.onPullDownLoad&&this.opt.onPullDownLoad(),
+this.pullingDownLock=!0),setTimeout(function(){
+o&&!t.pullingUpLock&&t.contentAreaWrp.scrollTop+t.contentAreaWrp.offsetHeight+h>t.contentEle.offsetHeight&&(t.opt.onPullUpLoad&&t.opt.onPullUpLoad(),
+t.pullingUpLock=!0);
+},100),this.opt.onScroll&&this.opt.onScroll(this.contentAreaWrp.scrollTop>this.curScrollTop?"up":"down"),
+this.curScrollTop=this.contentAreaWrp.scrollTop);
+}
+},{
+key:"onTouchStart",
+value:function(t){
+var e=t.touches[0];
+this.touches={
+startX:e.pageX,
+startY:e.pageY,
+curX:e.pageX,
+curY:e.pageY,
+isScreenLeft:this.enableGesture&&e.pageX<=30,
+direction:"",
+times:0
+};
+}
+},{
+key:"onTouchEnd",
+value:function(t){
+var e=this.touches.direction,o="X"===e?100:this.contentArea.offsetHeight/4,n=t.changedTouches[0]["page"+e]-this.touches["start"+e],i=this.contentArea.dataset;
+i.distance&&(n>o?this.hide():(this.contentArea.style.transition="transform .3s ease-in-out",
+this.contentArea.style.transform="translateY(0)"),delete i.distance);
+}
+},{
+key:"getTouchDirection",
+value:function(t){
+if(this.touches.direction)return!0;
+if(!this.touches.isScreenLeft)return this.touches.direction="Y",!0;
+this.touches.times++;
+var e=Math.abs(t.pageX-this.touches.startX),o=Math.abs(t.pageY-this.touches.startY);
+return this.touches.times>=3?(this.touches.direction=e>=o?"X":"Y",!0):e>=5&&e>=o?(this.touches.direction="X",
+!0):o>=5?(this.touches.direction="Y",!0):!1;
+}
+},{
+key:"moveByDirection",
+value:function(t){
+var e=this.touches.direction,o=t["page"+e];
+o-this.touches["start"+e]>0?this.move(o):this.resetMovement(),this.touches["cur"+e]=o;
+}
+},{
+key:"move",
+value:function(t){
+if(this.opt.sideslip2Hide&&"X"===this.touches.direction||this.opt.scroll2Hide&&"Y"===this.touches.direction){
+var e=this.contentArea.dataset;
+e.distance=1*(e.distance||0)+t-this.touches["cur"+this.touches.direction],this.contentArea.style.transform="translateY("+e.distance+"px)";
+}
+}
+},{
+key:"resetMovement",
+value:function(){
+delete this.contentArea.dataset.distance,this.contentArea.style.removeProperty("transform");
+}
+},{
+key:"show",
+value:function(t,o){
+var n=this;
+this.getShowStatus()||(e(this.contentArea,"visibility","visible"),s.addClass(this.rootEle,"wx_bottom_modal_show"),
+this.maskEle&&this.opt.clickMask2Hide&&e(this.maskNotClick,"visibility","visible"),
+this.opt.removeMask||l.show({
+alpha:this.opt.transparentMask?0:.6,
+callback:function(t){
+t&&"function"==typeof n.opt.onShowNavShadow&&n.opt.onShowNavShadow();
+},
+onClick:function(){
+n.hide();
+}
+}),r.os.ios&&this.opt.sideslip2Hide&&c.invoke("handleDeviceInfo",{
+action:"disableInteractivePop",
+disable:!0
+},function(t){
+/:ok$/.test(t.err_msg)&&(n.enableGesture=!0);
+}),t&&(s.addClass(this.rootEle,"wx_bottom_modal_form"),e(this.contentArea,"top","25px")),
+setTimeout(function(){
+t||(e(n.contentArea,"top",n.opt.top),"right"===n.opt.animationType&&(e(n.contentArea,"-ms-transform","translateX(0)"),
+e(n.contentArea,"transform","translateX(0)")));
+}),t&&(setTimeout(function(){
+"bottom"===n.opt.animationType?e(n.contentArea,"top","100%"):e(n.contentArea,"top",n.opt.top),
+console.log(n.contentArea.offsetHeight),s.removeClass(n.rootEle,"wx_bottom_modal_form"),
+setTimeout(function(){
+e(n.contentArea,"top",n.opt.top),"right"===n.opt.animationType&&(e(n.contentArea,"-ms-transform","translateX(0)"),
+e(n.contentArea,"transform","translateX(0)"));
+});
+},50),r.os.ios?o.focus():(this.tmpInputEle||(this.tmpInputEle=o.cloneNode(!0)),this.tmpInputEle.style.opacity=0,
+this.tmpInputEle.style.position="fixed",this.tmpInputEle.style.top=0,this.tmpInputEle.style.zIndex="-1",
+document.body.appendChild(this.tmpInputEle),setTimeout(function(){
+o.focus(),n.opt.makeInputEleBigger&&n.opt.makeInputEleBigger(),document.body.removeChild(n.tmpInputEle);
+},300),this.tmpInputEle.focus()),r.os.ios&&!this.hasBindInputEvent&&this.opt.makeFakeInputEle&&this.opt.removeInputEle&&(this.hasBindInputEvent=!0,
+a.on(o,"focus",function(){
+setTimeout(function(){
+o.style.opacity=1,n.opt.removeInputEle();
+},50);
+}),a.on(o,"blur",function(){
+n.opt.makeFakeInputEle(),o.style.opacity=0;
+}))),this.opt.onShow&&this.opt.onShow());
+}
+},{
+key:"hide",
+value:function(t){
+var o=this;
+t&&e(this.maskNotClick,"visibility","hidden"),this.getShowStatus()&&("bottom"===this.opt.animationType?this.contentArea.style.removeProperty("top"):(this.contentArea.style.removeProperty("-ms-transform"),
+this.contentArea.style.removeProperty("transform")),s.removeClass(this.rootEle,"wx_bottom_modal_show"),
+this.opt.removeMask||l.hide(),r.os.ios&&this.opt.sideslip2Hide&&c.invoke("handleDeviceInfo",{
+action:"disableInteractivePop",
+disable:!1
+},function(t){
+/:ok$/.test(t.err_msg)&&(o.enableGesture=!1);
+}),this.opt.onHide&&this.opt.onHide());
+}
+},{
+key:"disableBtn",
+value:function(){
+this.submitBtn&&s.addClass(this.submitBtn,u);
+}
+},{
+key:"enableBtn",
+value:function(){
+this.submitBtn&&s.removeClass(this.submitBtn,u);
+}
+},{
+key:"finishPullUpLoad",
+value:function(){
+this.pullingUpLock=!1;
+}
+},{
+key:"finishPullDownLoad",
+value:function(){
+this.pullingDownLock=!1;
+}
+},{
+key:"setTitle",
+value:function(t){
+this.headAreaWrp&&("string"==typeof t?this.headAreaWrp.getElementsByClassName("js_bottom_modal_title")[0].innerHTML=t:"object"===("undefined"==typeof t?"undefined":_typeof(t))&&t.innerHTML&&(this.headAreaWrp.getElementsByClassName("js_bottom_modal_title")[0].innerHTML=t.innerHTML));
+}
+},{
+key:"scrollTo",
+value:function(){
+var t;
+(t=this.contentAreaWrp).scrollTo.apply(t,arguments);
+}
+},{
+key:"getRootEle",
+value:function(){
+return this.rootEle;
+}
+},{
+key:"getBdEle",
+value:function(){
+return this.contentAreaWrp;
+}
+},{
+key:"getScrollEle",
+value:function(){
+return this.contentAreaWrp;
+}
+},{
+key:"setCloseBtnStyle",
+value:function(t){
+if(this.closeBtn){
+var e=this.closeBtn.getElementsByTagName("i")[0],o="weui-icon-close-thin",n="weui-icon-back-arrow-thin";
+"back"===t?(s.removeClass(e,o),s.addClass(e,n)):(s.removeClass(e,n),s.addClass(e,o));
+}
+}
+},{
+key:"getShowStatus",
+value:function(){
+return s.hasClass(this.rootEle,"wx_bottom_modal_show");
+}
+},{
+key:"showLoading",
+value:function(){
+e(this.loading,"display","block");
+}
+},{
+key:"hideLoading",
+value:function(){
+e(this.loading,"display","none");
+}
+},{
+key:"showPullUpLoading",
+value:function(){
+this.contentAreaWrp.appendChild(this.pullLoading),e(this.pullLoading,"display","block");
+}
+},{
+key:"hidePullUpLoading",
+value:function(){
+e(this.pullLoading,"display","none");
+}
+},{
+key:"showPullDownLoading",
+value:function(){
+this.contentAreaWrp.insertBefore(this.pullLoading,this.contentAreaWrp.firstChild),
+e(this.pullLoading,"display","block");
+}
+},{
+key:"hidePullDownLoading",
+value:function(){
+e(this.pullLoading,"display","none");
+}
+},{
+key:"showEndLine",
+value:function(){
+this.contentAreaWrp.appendChild(this.endLine),e(this.endLine,"display","block");
+}
+}]),t;
+}();
+return m;
+});
