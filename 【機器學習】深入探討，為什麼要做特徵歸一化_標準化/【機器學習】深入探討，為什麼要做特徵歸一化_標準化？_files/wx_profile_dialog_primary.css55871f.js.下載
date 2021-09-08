@@ -1,0 +1,979 @@
+define("appmsg/comment/comment_input/comment_input.html.js",[],function(){
+return'<div class="comment_primary_input_area js_wrp" style="display: none">\n  <# if (deviceIsPc) { #>\n    <!-- PC端 -->\n    <div class="comment_primary_input_wrp">\n      <div class="comment_primary_input js_input" contenteditable></div>\n      <div class="comment_primary_input_placeholder js_placeholder"><#=placeholder#></div>\n    </div>\n    <div class="comment_primary_tool js_tool">\n      <button disabled="disabled" class="reset_btn comment_primary_btn js_submit"><#=submitText#></button>\n      <div class="comment_primary_emotion_wrp js_emotion_wrp">\n        <span class="icon_comment_primary_emotion"></span>\n      </div>\n      <!-- 超出字数往comment_primary_counter加comment_primary_counter_warn  -->\n      <span class="comment_primary_counter js_counter" style="display: none">\n        <em class="js_counter_len"></em>\n        /\n        <span><#=length#></span>\n      </span>\n    </div>\n  <# } else { #>\n    <!-- 手机端 -->\n    <div class="discuss_textarea_box">\n      <textarea class="discuss_textarea js_input js_placeholder" placeholder="<#=placeholder#>"></textarea>\n      <div class="emotion_tool">\n        <span class="pic_emotion_switch_wrp js_emotion_wrp">\n          <img class="pic_default" src="<#=iconEmotionSwitch#>" alt="">\n          <img class="pic_active" src="<#=iconEmotionSwitchActive#>" alt="">\n          <img class="pic_default_primary" src="<#=iconEmotionSwitchPrimary#>" alt="">\n          <img class="pic_active_primary" src="<#=iconEmotionSwitchActivePrimary#>" alt="">\n        </span>\n      </div>\n    </div>\n\n    <div class="emotion_panel js_emotion_panel">\n      <span class="emotion_panel_arrow_wrp js_emotion_panel_arrow_wrp">\n        <i class="emotion_panel_arrow arrow_out"></i>\n        <i class="emotion_panel_arrow arrow_in"></i>\n      </span>\n      <div class="emotion_list_wrp js_slide_wrapper"></div>\n      <ul class="emotion_navs js_navbar"></ul>\n    </div>\n\n    <div class="discuss_btn_wrp js_tool">\n      <button disabled="disabled" class="weui-btn weui-btn_primary js_submit">留言</button>\n    </div>\n  <# } #>\n</div>\n';
+});define("appmsg/emotion/selection.js",[],function(e,n){
+"use strict";
+function t(e,n,t){
+if(!t&&e===n)return!1;
+if(e.compareDocumentPosition){
+var o=e.compareDocumentPosition(n);
+if(20===o||0===o)return!0;
+}else if(e.contains(n))return!0;
+return!1;
+}
+function o(e,n){
+var o=n.commonAncestorContainer||n.parentElement&&n.parentElement()||null;
+return o?t(e,o,!0):!1;
+}
+n.getSelection=function(){
+return document.selection?document.selection:(window.getSelection||document.getSelection)();
+},n.getRange=function(e){
+var n=getSelection();
+if(!n)return null;
+var t=void 0;
+return n.getRangeAt&&n.rangeCount?t=n.getRangeAt(0):n.getRangeAt||(t=n.createRange()),
+t?e&&o(e,t)?t:e?null:t:null;
+},n.setCursorToEnd=function(e){
+if(e){
+var n=getSelection();
+n.extend&&(n.extend(e,e.length),n.collapseToEnd&&n.collapseToEnd());
+}
+},n.contains=t;
+});define("appmsg/comment/comment_dialog/comment_dialog.html.js",[],function(){
+return'<# if (deviceIsPc) { #>\n  <!-- PC自己写一个dialog并追加到body -->\n  <div class="discuss_more_pc_dialog_wrp js_comment_dialog_pc" style="display: none;">\n    <div class="discuss_more_pc_dialog">\n      <div class="discuss_more_pc_dialog_hd">\n        <strong class="discuss_more_pc_dialog_title">留言</strong>\n        <button class="discuss_more_pc_dialog_close_btn reset_btn js_close">\n          <i class="weui-icon-close"></i>\n        </button>\n      </div>\n      <div class="discuss_more_pc_dialog_bd js_bd">\n        <div class="js_bd_main">\n          <div class="discuss_media_current js_comment_list"></div> <!-- 留言列表 -->\n          <div class="discuss_more_list_area">\n            <div class="discuss_more_list_title">全部回复</div>\n            <ul class="discuss_more_list js_reply_list"></ul> <!-- 回复列表 -->\n\n            <div class="js_loading" style="display: none;">\n              <div class="weui-loadmore weui-loadmore_default">\n                <i class="weui-primary-loading"></i>\n                <span class="weui-loadmore__tips">正在加载</span>\n              </div>\n            </div>\n\n            <!-- 结束线 -->\n            <div style="display: none;">\n              <div class="weui-loadmore weui-loadmore_default weui-loadmore_line weui-loadmore_dot">\n                <span class="weui-loadmore__tips"></span>\n              </div>\n            </div>\n\n            <div class="js_empty" style="display: none;">\n              <div class="weui-loadmore weui-loadmore_default">\n                <span class="weui-loadmore__tips">暂无回复</span>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class="weui-mask"></div>\n  </div>\n<# } else { #>\n  <!-- 手机端基于bottom_modal组件 -->\n  <div class="js_bd discuss_more_dialog_content">\n    <div class="discuss_more_dialog_content_bd">\n      <div class="discuss_media_current js_comment_list"></div> <!-- 留言列表 -->\n      <div class="discuss_more_list_area">\n        <div class="discuss_more_list_wrp">\n          <div class="discuss_more_list_title">全部回复</div>\n          <div class="discuss_more_list js_reply_list"></div> <!-- 回复列表 -->\n        </div>\n\n        <div class="js_loading" style="display: none;">\n          <div class="weui-loadmore weui-loadmore_default">\n            <i class="weui-primary-loading"></i>\n            <span class="weui-loadmore__tips">正在加载</span>\n          </div>\n        </div>\n\n        <!-- 结束线 -->\n        <div class="js_end" style="display: none;">\n          <div class="weui-loadmore weui-loadmore_default weui-loadmore_line weui-loadmore_dot">\n            <span class="weui-loadmore__tips"></span>\n          </div>\n        </div>\n\n        <!-- 无回复 -->\n        <div class="js_empty" style="display: none;">\n          <div class="tips_global_primary discuss_more_empty_tips">\n            暂无回复          </div>\n        </div>\n      </div>\n    </div>\n    <div class="discuss_more_dialog_content_ft">\n      <div class="discuss_more_form weui-flex js_reply_btn">\n        <div class="weui-flex__item">\n          <div class="discuss_form_input js_placeholder" role="option"></div>\n        </div>\n        <a class="icon_discuss_emotion js_emotion_btn" role="button" aria-label="表情" title="轻点两下打开表情键盘" href="javascript:;"></a>\n      </div>\n    </div>\n  </div>\n<# } #>\n';
+});define("appmsg/comment/comment_dialog/c2c_not_support_dialog.html.js",[],function(){
+return'<!-- 不支持c2c回复弹窗，基于bottom_modal组件 -->\n\n<!-- bd部分 -->\n<div class="js_bd discuss_more_guide">\n  <p class="discuss_more_guide_tips">更新微信到最新版本，可以回复他人留言</p>\n  <img class="pic_discuss_more_guide" src="<#= comment_c2c_not_support_img #>" alt="">\n</div>\n\n<!-- ft部分 -->\n<div class="js_ft">\n  <a href="javascript:;" class="weui-btn weui-btn_default js_close">知道了</a>\n  <a href="javascript:;" class="weui-btn weui-btn_primary js_update">去更新</a>\n</div>\n';
+});function _classCallCheck(t,o){
+if(!(t instanceof o))throw new TypeError("Cannot call a class as a function");
+}
+var _createClass=function(){
+function t(t,o){
+for(var e=0;e<o.length;e++){
+var i=o[e];
+i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i);
+}
+}
+return function(o,e,i){
+return e&&t(o.prototype,e),i&&t(o,i),o;
+};
+}();
+define("appmsg/emotion/emotion_pc.js",["biz_common/utils/emoji_data.js","biz_common/utils/emoji_panel_data.js","biz_common/dom/event.js","appmsg/emotion/emotion.js","common/utils.js","biz_wap/utils/mmversion.js","pages/utils.js","biz_common/tmpl.js","appmsg/emotion/emotion_pc.html.js"],function(t,o,e){
+"use strict";
+var i=t("biz_common/utils/emoji_data.js"),n=t("biz_common/utils/emoji_panel_data.js"),s=t("biz_common/dom/event.js"),a=t("appmsg/emotion/emotion.js").encode,m=t("common/utils.js"),l=t("biz_wap/utils/mmversion.js"),c=t("pages/utils.js"),r=t("biz_common/tmpl.js"),d=t("appmsg/emotion/emotion_pc.html.js"),h="js_emotion_item",u=m.getInnerHeight(),p=13,v=13,f=25.5,j=function(){
+function t(o){
+_classCallCheck(this,t),this.edata=[],this.emojiText={},this.isShow=!1,this.onSelect=o.onSelect,
+this.initEmotionData();
+var e=document.createElement("div");
+e.innerHTML=r.tmpl(d,{
+list:this.edata
+},!1);
+var i=c.qs(".js_emotion_panel",e);
+document.body.appendChild(i),this.dom={
+emotionSwitch:o.emotionSwitch,
+emotionPanel:i,
+emotionList:c.qs(".js_emotion_list",i),
+input:o.input,
+submit:o.submit,
+tool:o.tool
+},this.bindEvent();
+}
+return _createClass(t,[{
+key:"initEmotionData",
+value:function(){
+var t=this,o=[];
+n.forEach(function(t,e){
+i.some(function(i){
+return i.id===t?(o[e]=i,!0):!1;
+});
+});
+for(var e=0;v>e;e++)for(var s=0;p>s;s++){
+var a=e*p+s;
+o[a]&&this.edata.push({
+name:o[a].style,
+title:o[a].emoji?o[a].emoji:o[a].cn,
+bp:"background-position: 0 -"+a*f+"px;",
+id:o[a].id
+});
+}
+o.forEach(function(o){
+t.emojiText[o.style]=o.emoji||o.cn;
+});
+}
+},{
+key:"bindEvent",
+value:function(){
+var t=this;
+s.on(window,"resize",this.emotionPanelMove),s.tap(this.dom.emotionSwitch,function(){
+t[t.isShow?"hide":"show"]();
+}),s.tap(this.dom.emotionList,function(o){
+for(var e=o.target;e&&e!==t.dom.emotionList&&!e.classList.contains(h);)e=e.parentNode;
+e.classList.contains(h)&&"function"==typeof t.onSelect&&t.onSelect(t.edata[e.dataset.index]);
+});
+}
+},{
+key:"show",
+value:function(){
+this.isShow=!0;
+var t=this.dom.emotionPanel;
+t.style.display="",this.zoomEmotionPanel();
+var o=t.getBoundingClientRect();
+o.top+o.height>=u&&window.scrollTo(0,window.scrollY+o.height);
+}
+},{
+key:"hide",
+value:function(){
+this.isShow=!1,this.dom.emotionPanel.style.display="none";
+}
+},{
+key:"zoomEmotionPanel",
+value:function(){
+var t=this.dom.emotionPanel,o=window.getComputedStyle(c.qs(".rich_media_tool")).zoom,e=this.dom.tool.getBoundingClientRect();
+t.style.left=e.right*o+"px",t.style.transform="translateX(-100%)",l.isWindows?t.style.top=window.scrollY+e.top*o+e.height*o+"px":l.isMac&&(t.style.top=(window.scrollY+e.top+e.height)*o+"px");
+}
+},{
+key:"emotionPanelMove",
+value:function(){
+this.isShow&&this.zoomEmotionPanel();
+}
+},{
+key:"textFilter",
+value:function(t){
+var o=document.createElement("div");
+o.innerHTML=t;
+for(var e="",i="",n=[],s=void 0,a=0;a<o.childNodes.length;a++){
+var m=o.childNodes[a];
+1===m.nodeType&&("IMG"===m.nodeName.toUpperCase()||"I"===m.nodeName.toUpperCase())&&(i=m.getAttribute("class"),
+i&&(n=i.split(" "),n.length>1&&"icon_emotion_single"===n[0]&&(e=this.emojiText[n[1]],
+s=document.createTextNode(e),o.replaceChild(s,m))));
+}
+return o.innerHTML.replace(/<br.*?>/gi,"\n").replace(/<.*?>/g,"");
+}
+}]),t;
+}();
+e.exports={
+Emotion:j,
+encode:a
+};
+});define("appmsg/comment/comment_list/item.html.js",[],function(){
+return'<div class="discuss_media js_item <# if (itemType === \'reply\') { #> js_reply_item <# } else { #> js_comment_main <# } #>\n  <# if (!item.is_from_author) { #> discuss_media_user<# } #>\n  <# if (canC2CReply || (!canC2CReply && itemType === \'comment\' && item.is_from_me == 1)) { #> js_can_reply<# } #>\n  <# if (item.needAnimation) { #> discuss_new_show<# } #>\n  "\n\n  <# if (isOversize) { #> style="display: none;" <# } #>\n\n  <# if (itemType === \'comment\') { #>\n    data-my-id="<#=item.my_id#>"\n    data-content-id="<#=item.content_id#>"\n  <# } else { #>\n    data-my-id="<#=my_id#>"\n    data-content-id="<#=content_id#>"\n    data-reply-id="<#=item.reply_id#>"\n  <# } #>\n>\n  <div class="discuss_hd">\n    <img alt="" class="discuss_user_avatar" src="<#=item.logo_url#>">\n  </div>\n  <div class="discuss_bd">\n    <div class="discuss_overview weui-flex weui-flex_align-center">\n      <div class="weui-flex__item discuss_user_info <# if (item.is_from_author) { #> discuss_author_info <# } #>" id="js_discuss_user_info_<# if (itemType === \'comment\') { #><#=item.content_id#><# } else { #><#=content_id#>_<#=item.reply_id#><# } #>"\n        <# if (canUseOption) { #>\n          role="option"\n          aria-labelledby="\n          js_discuss_user_info_<# if (itemType === \'comment\') { #><#=item.content_id#><# } else { #><#=content_id#>_<#=item.reply_id#><# } #>\n          js_a11y_colon\n          js_discuss_message_<# if (itemType === \'comment\') { #><#=item.content_id#><# } else { #><#=content_id#>_<#=item.reply_id#><# } #>"\n          aria-describedby="\n          js_discuss_message_status_<# if (itemType === \'comment\') { #><#=item.content_id#><# } else { #><#=content_id#>_<#=item.reply_id#><# } #>"\n        <# } #>\n        >\n        <div class="discuss_user_nickname"><#=item.nick_name#></div>\n        <# if (item.is_from_friend == 1) { #><span class="discuss_relation_tips"> (朋友)</span><# } #>\n        <# if (item.is_from_author) { #><span class="discuss_relation_tips"> (作者)</span><# } #>\n        <# if (typeof item.is_top === \'number\' && item.is_top == 1) { #><span class="icon_appmsg_tag">置顶</span><# } #>\n        <# if (!(type === \'mine\' && itemType === \'reply\' && canC2CReply) && deviceIsPc && !(item.is_elected == 1 || item.reply_is_elected == 1)) { #><span class="tips_global_primary">未精选</span><# } #>\n      </div>\n\n      <# if (!isWxWork) { #>\n        <# if (deviceIsPc) { #>\n          <!-- pc留言操作-->\n          <div class="discuss_opr discuss_opr_pc">\n            <# if (supportReply && (canC2CReply || (!canC2CReply && itemType === \'comment\' && item.is_from_me == 1))) { #>\n              <!-- 留言 输入框聚焦的时候discuss_opr_meta加commenting-->\n              <span title="回复" class="discuss_opr_meta discuss_opr_meta_comment">\n                <button class="sns_opr_btn sns_comment_btn js_<#=itemType#>_reply_pc"></button>\n              </span>\n            <# } #>\n\n            <!-- 更多 展开的时候discuss_opr_meta加openning -->\n            <span title="更多操作" class="discuss_opr_meta discuss_opr_meta_more">\n              <button class="sns_opr_btn sns_more_btn js_dropdown"></button>\n              <div class="discuss_dropdown <# if (type === \'mine\') { #>discuss_dropdown_pos_top_right<# } else { #>discuss_dropdown_pos_top_center<# } #>">\n                <# if (item.is_from_me == 1) { #>\n                  <div class="discuss_dropdown_item js_<#=itemType#>_del">删除</div>\n                <# } #>\n                <div class="discuss_dropdown_item js_<#=itemType#>_complain">投诉</div>\n              </div>\n            </span>\n\n            <# if (!(type === \'mine\' && itemType === \'reply\' && canC2CReply) && (item.is_elected == 1 || item.reply_is_elected == 1)) { #>\n              <span title="<# if ((itemType === \'comment\' && item.like_status == 1) || (itemType === \'reply\' && item.reply_like_status == 1)) { #>取消点赞<# } else { #>点赞<# } #>" class="discuss_opr_meta js_<#=itemType#>_praise <# if ((itemType === \'comment\' && item.like_status == 1) || (itemType === \'reply\' && item.reply_like_status == 1)) { #>praised<# } #>">\n                <button class="sns_opr_btn sns_praise_btn">\n                  <# if (itemType === \'comment\' && item.like_num_format !== 0) { #>\n                    <span class="sns_opr_num sns_opr_gap praise_num"><#=item.like_num_format#></span>\n                  <# } else if (itemType === \'reply\' && item.reply_like_num_format !== 0) { #>\n                    <span class="sns_opr_num sns_opr_gap praise_num"><#=item.reply_like_num_format#></span>\n                  <# } else { #>\n                    <span class="sns_opr_num sns_opr_gap praise_num"></span>\n                  <# } #>\n                </button>\n              </span>\n            <# } #>\n          </div>\n        <# } else { #>\n          <!-- 移动端留言操作-->\n          <div class="discuss_opr">\n            <# if (item.is_from_me == 1) { #>\n              <a role="button" class="weui-wa-hotarea_before discuss_opr_meta discuss_del js_<#=itemType#>_del">删除</a>\n            <# } #>\n\n            <# if (supportReply && (canC2CReply || (!canC2CReply && itemType === \'comment\' && item.is_from_me == 1))) { #>\n              <a role="button" class="weui-wa-hotarea_before discuss_opr_meta js_reply_btn js_can_reply" data-type="<#=itemType#>">回复</a>\n            <# } #>\n\n            <# if (!(type === \'mine\' && itemType === \'reply\' && canC2CReply)) { #>\n              <# if (item.is_elected == 1 || item.reply_is_elected == 1) { #>\n                <span class="discuss_opr_meta js_<#=itemType#>_praise <# if ((itemType === \'comment\' && item.like_status == 1) || (itemType === \'reply\' && item.reply_like_status == 1)) { #>praised<# } #>">\n                  <button class="weui-wa-hotarea sns_opr_btn sns_praise_btn">\n                    <span class="aria_hidden_abs">赞</span>\n                    <# if (itemType === \'comment\' && item.like_num_format !== 0) { #>\n                      <span class="sns_opr_num sns_opr_gap praise_num"><#=item.like_num_format#></span>\n                    <# } else if (itemType === \'reply\' && item.reply_like_num_format !== 0) { #>\n                      <span class="sns_opr_num sns_opr_gap praise_num"><#=item.reply_like_num_format#></span>\n                    <# } else { #>\n                      <span class="sns_opr_num sns_opr_gap praise_num"></span>\n                    <# } #>\n                  </button>\n                </span>\n              <# } else { #>\n                <span class="discuss_opr_meta">未精选</span>\n              <# } #>\n            <# } #>\n          </div>\n        <# } #>\n      <# } #>\n    </div>\n\n    <div <# if (canUseOption) { #> aria-hidden="true"<# } #> class="discuss_message">\n      <span class="discuss_status" id="js_discuss_message_status_<# if (itemType === \'comment\') { #><#=item.content_id#><# } else { #><#=content_id#>_<#=item.reply_id#><# } #>"><#=item.status#></span>\n      <div class="wx_folder js_folder_area">\n        <# if (type === \'reply\' && item.to_nick_name) { #>\n          <div id="js_discuss_message_<# if (itemType === \'comment\') { #><#=item.content_id#><# } else { #><#=content_id#>_<#=item.reply_id#><# } #>" class="discuss_message_content wx_folder_normal js_content">回复 <strong class="discuss_message_reply_nickname"><#=item.to_nick_name#></strong>：<#=item.content#></div>\n        <# } else { #>\n          <div id="js_discuss_message_<# if (itemType === \'comment\') { #><#=item.content_id#><# } else { #><#=content_id#>_<#=item.reply_id#><# } #>" class="discuss_message_content wx_folder_normal js_content"><#=item.content#></div>\n        <# } #>\n        <# if (type === \'comment\') { #>\n          <div aria-hidden="true" class="discuss_message_content wx_folder_fake js_fake_content"><#=item.content#></div>\n\n          <!-- 当normal和fake不等高的时候显示展开按钮 -->\n          <button aria-hidden="true" class="wx_folder_btn reset_btn js_folder" type="button" style="display: none;">展开</button>\n        <# } #>\n      </div>\n    </div>\n\n    <!-- 预览上次回复内容 -->\n    <!-- <# if (item.to_nick_name && item.to_content) { #>\n      <div class="discuss_reply_primary">\n        <div class="discuss_reply_primary_inner">\n          <# if (item.to_reply_del_flag === 0) { #>\n            <strong class="discuss_reply_nickname"><#=item.to_nick_name#>: </strong>\n            <p class="discuss_reply_content js_to_content"><#=item.to_content#></p>\n          <# } else { #>\n            <p class="discuss_reply_content">回复已删除</p>\n          <# } #>\n        </div>\n      </div>\n    <# } #> -->\n\n    <# if (type === \'comment\' || type === \'reply\') { #>\n      <div class="discuss_extra_info discuss_extra_info_primary">\n        <div class="discuss_extra_info_meta"><#=item.time#></div>\n        <# if (type === \'reply\' && !item.is_from_author && item.author_like_status) { #>\n          <div class="discuss_extra_info_meta">作者赞过</div>\n        <# } #>\n      </div>\n    <# } #>\n\n\n    <!-- pc回复留言输入框 -->\n    <div class="discuss_reply_form_area js_input_pc"></div>\n  </div>\n</div>\n';
+});define("appmsg/comment/comment_list/comment_item.html.js",[],function(){
+return'<li class="js_comment_item discuss_item cid<# if (item.is_from_me == 1) { #><#=item.my_id#><# } else { #><#=item.content_id#><# } #>"\n  id="cid<# if (item.is_from_me == 1) { #><#=item.my_id#><# } else { #><#=item.content_id#><# } #>"\n  data-elected="<#=item.report_elected#>"\n  data-friend="<#=item.report_friend#>"\n  data-my-id="<#=item.my_id#>"\n  data-content-id="<#=item.content_id#>"\n\n  <# if (isOversize) { #> style="display: none;" <# } #>\n>\n  <mp-comment-item></mp-comment-item> <!-- 这里只是一个占位符而已（即虚拟节点），最终会被替换成留言节点DOM（./item.html），由于是全匹配，所以不要随便改这个虚拟节点 -->\n\n  <# if (type !== \'comment\') { #>\n    <div class="discuss_reply_area">\n      <div class="discuss_reply js_reply_list">\n        <# if (item.reply_new && item.reply_new.reply_list && item.reply_new.reply_list.length > 0) { #>\n          <mp-reply-list></mp-reply-list> <!-- 这里只是一个占位符而已（即虚拟节点），最终会被替换成多个回复节点DOM（./item.html），由于是全匹配，所以不要随便改这个虚拟节点 -->\n        <# } #>\n      </div>\n\n      <# if (type !== \'mine\') { #>\n        <div class="discuss_extra_info js_more_reply" <# if (item.reply_new.reply_total_cnt === 0 || item.reply_new.reply_total_cnt === item.reply_new.reply_list.length) { #> style="display: none;" <# } #>>\n          <a href="javascript:;" role="button" class="dicuss_reply_more js_extend_comment weui-wa-hotarea_before">共<span class="js_reply_length"><#=item.reply_new.reply_total_cnt#></span>条回复</a>\n        </div>\n      <# } #>\n    </div>\n  <# } #>\n</li>\n';
+});define("common/actionSheet.js",["biz_wap/ui/weui.js","biz_wap/jsapi/core.js","common/navShadow.js","common/keyboard.js","biz_wap/utils/mmversion.js"],function(n){
+"use strict";
+n("biz_wap/ui/weui.js");
+var o=n("biz_wap/jsapi/core.js"),i=n("common/navShadow.js"),e=n("common/keyboard.js"),t=n("biz_wap/utils/mmversion.js"),c=!e.onlyUseH5Keyboard||t.isAndroid,a=function(n){
+var o=window.weui.actionSheet(n.buttons,[{
+label:"取消",
+onClick:function(){
+"function"==typeof n.onCancel&&n.onCancel();
+}
+}],{
+className:"weui-pop-zindex-primary",
+onClose:function(){
+i.hide(),"function"==typeof n.onClose&&n.onClose();
+},
+onClickMask:function(){
+"function"==typeof n.onCancel&&n.onCancel();
+}
+});
+i.show({
+onClick:function(){
+o.hide();
+}
+});
+};
+return{
+show:function(n){
+if(!c)return void a(n);
+var i={};
+o.invoke("handleMPPageAction",{
+action:"showActionSheet",
+buttons:n.buttons.map(function(n,o){
+var e=""+o;
+return i[e]=n.onClick,{
+id:e,
+label:n.label
+};
+})
+},function(o){
+/:ok$/.test(o.err_msg)?"function"==typeof i[o.id]&&i[o.id]():/:canceled$/.test(o.err_msg)?"function"==typeof n.onCancel&&n.onCancel():"action isn't supported"===o.err_desc||"action not support"===o.err_desc?a(n):"function"==typeof n.onFail&&n.onFail(o.err_msg);
+});
+}
+};
+});define("appmsg/comment/comment_write_dialog/comment_write_dialog.html.js",[],function(){
+return'<div class="js_bd comment_reply_context">\n  <# if (type !== \'comment\') { #>\n    <div class="comment_reply_mod_wrp" role="option">\n      <div class="comment_reply_mod js_reply_to"></div>\n    </div>\n  <# } #>\n\n  <!-- 实际编辑用的textarea -->\n  <textarea placeholder="<#=placeholder#>" class="weui-textarea comment_textarea js_input"></textarea>\n  <!-- 以下textarea是仅用于占位用的，为了防止focus时页面抖动，会在focus的瞬间让上面的textarea高度设为0并显示下面的textarea占位，300ms后再隐藏下面的textarea并显示实际的textarea -->\n  <textarea placeholder="<#=placeholder#>" class="weui-textarea comment_textarea js_placeholder" style="flex: 1; display: none;" readonly></textarea>\n\n  <div class="discuss_toolbar js_toolbar">\n    <a role="button" class="icon_discuss_emotion js_emotion_btn" href="javascript:;">表情</a>\n    <span class="js_input_tips comment_write_counter"></span>\n  </div>\n\n  <!-- <div style="display: none;">\n    <div class="weui-mask_transparent"></div>\n    <div class="weui-toast">\n      <i class="weui-icon-success-no-circle weui-icon_toast"></i>\n      <p class="weui-toast__content">发送中</p>\n    </div>\n  </div> -->\n</div>\n';
+});// __BUILD__COMPRESS=FALSE
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+;define('pages/bottom_input_bar.js', ['biz_wap/zepto/zepto.js', 'page/pages/bottom_input_bar.css', 'biz_wap/jsapi/log.js', 'biz_wap/jsapi/core.js', 'biz_common/utils/emoji_panel_data.js', 'biz_common/utils/emoji_data.js', 'biz_wap/utils/mmversion.js', 'biz_wap/utils/device.js', 'biz_common/dom/event.js', 'appmsg/set_font_size.js'], function (require, exports, module, alert) {
+  'use strict';
+
+  require('biz_wap/zepto/zepto.js');
+  require('page/pages/bottom_input_bar.css');
+
+  var Log = require('biz_wap/jsapi/log.js');
+  var JSAPI = require('biz_wap/jsapi/core.js');
+  var panelData = require('biz_common/utils/emoji_panel_data.js');
+  var emojiData = require('biz_common/utils/emoji_data.js');
+  var mmversion = require('biz_wap/utils/mmversion.js');
+  var Device = require('biz_wap/utils/device.js');
+  var DomEvent = require('biz_common/dom/event.js');
+  var fontSize = require('appmsg/set_font_size.js');
+
+  var getEmojiText = function getEmojiText(emoji) {
+    for (var i = 0; i < emojiData.length; i++) {
+      var e = emojiData[i];
+      switch (emoji) {
+        case e.cn:
+          return e.emoji || e.cn;
+        case e.hk:
+          return e.emoji || e.hk;
+        case e.us:
+          return e.emoji || e.us;
+        case e.emoji:
+          return e.emoji;
+        case e.code:
+          return e.emoji || e.cn;
+        default:
+          {
+            if (!mmversion.isIOS && e.code.startsWith('\\ue')) {
+              try {
+                var c = eval('\'' + e.code + '\'');
+                if (emoji === c) {
+                  return e.emoji || e.cn;
+                }
+              } catch (err) {}
+            }
+            break;
+          }
+      }
+    }
+    return '';
+  };
+
+  var getRealHeightOfIOSNativePanel = function getRealHeightOfIOSNativePanel(oriHeight, callback) {
+    JSAPI.invoke('handleDeviceInfo', {
+      action: 'getUIParams'
+    }, function (res) {
+      var realHeight = oriHeight;
+      if (!!res.isShowBottomBar) {
+        realHeight -= res.bottomBarHeight;
+      }
+      realHeight = Math.max(realHeight, 0);
+      typeof callback === 'function' && callback(realHeight);
+    });
+  };
+
+  var getAndroidInnerHeightIndex = function getAndroidInnerHeightIndex(isFullscreen, isLandscape) {
+    if (isFullscreen) {
+      return isLandscape ? 2 : 1;
+    }
+    return 0;
+  };
+
+  var androidNavigationBarHeight = 50;
+  if (mmversion.isAndroid) {
+    (function () {
+      var getAndroidNavigationBarHeight = function getAndroidNavigationBarHeight() {
+        JSAPI.invoke('handleMPPageAction', {
+          action: 'getNavigationBarHeight'
+        }, function (res) {
+          androidNavigationBarHeight = res.height || 50;
+        });
+      };
+      getAndroidNavigationBarHeight();
+      document.addEventListener('visibilitychange', function () {
+        !document.hidden && getAndroidNavigationBarHeight();
+      });
+    })();
+  }
+
+  var tpl = '<div class="comment__push__container">' + '<div class="js_bottom_input_mask comment__push__mask" style="display: none;"></div>' + '<div class="js_bottom_input_wrapper comment__push" style="opacity: 0;">' + '<div class="comment__push__inner">' + '<div class="comment__push__input_wrp">' + '<div class="js_bottom_input_faker comment__push__input__faker"></div>' + '<textarea class="js_bottom_input comment__push__input"></textarea>' + '<div class="js_bottom_input_counter comment__push__input__counter comment__push__input__counter_warn" style="display: none;"></div>' + '</div>' + '</div>' + '<div class="comment__push__extend">' + '<a href="javascript:;" class="js_bottom_input_emoji comment__push__btn comment__push__emoji weui-wa-hotarea">表情</a>' + '<a href="javascript:;" class="js_bottom_input_submit comment__push__btn comment__push__send weui-wa-hotarea">发送</a>' + '</div>' + '</div>' + '</div>';
+
+  function BottomInputBar(opt) {
+    this.opt = {
+      placeholder: '',
+      limit: 0
+    };
+
+    this.opt = _extends(this.opt, opt);
+
+    this.state = {
+      inChooseEmoji: false,
+      listener: {},
+      limit: this.opt.limit,
+      show: false,
+      keyboardHeight: 0,
+      panelHeight: 0,
+      androidTriggeringEmoji: false,
+      androidShowingKeybroad: false,
+      androidInFullscreen: false,
+      androidInLandscape: false,
+      androidOriWinInnerHeight: [window.innerHeight, window.innerHeight, window.innerWidth],
+      androidMinWinInnerHeight: [window.innerHeight, window.innerHeight, window.innerWidth],
+      showEmotionFirst: false
+    };
+
+    this.__isComposition = false;
+
+    this.__mount();
+    this.__bindEvent();
+  }
+
+  BottomInputBar.prototype.__mount = function () {
+    this.$el = $(tpl);
+
+    if (mmversion.isAndroid) {
+      fontSize.keepNormalFontSizeForAndroid(this.$el[0]);
+    }
+
+    this.inputEle = this.$el.find('.js_bottom_input')[0];
+    this.$mask = this.$el.find('.js_bottom_input_mask');
+    this.$inputWrapper = this.$el.find('.js_bottom_input_wrapper');
+
+    if (this.state.limit !== 0) {
+      this.inputEle.setAttribute('maxlength', this.state.limit);
+    }
+    this.inputEle.setAttribute('placeholder', this.__filterContent(this.opt.placeholder));
+
+    if (!mmversion.isIOS) {
+      this.__initEmojiPanel();
+    }
+
+    document.body.append(this.$el[0]);
+  };
+
+  BottomInputBar.prototype.__bindEvent = function () {
+    var _this = this;
+
+    var submitBtn = this.$el.find('.js_bottom_input_submit')[0];
+    var emotionBtn = this.$el.find('.js_bottom_input_emoji')[0];
+    DomEvent.tap(this.$inputWrapper[0], function (e) {
+      var target = e.target;
+      if (target !== _this.inputEle && target !== submitBtn && target !== emotionBtn) {
+        e.preventDefault();
+      }
+    });
+    DomEvent.tap(this.$mask[0], function (e) {
+      console.log('hide[mask tap]');
+      Log.info('hide[mask tap]');
+      _this.hide();
+      e.preventDefault();
+    });
+    DomEvent.on(this.$mask[0], 'touchmove', function (e) {
+      console.log('hide[mask touchmove]');
+      Log.info('hide[mask touchmove]');
+      _this.hide();
+      e.preventDefault();
+    });
+    DomEvent.tap(this.inputEle, function (e) {
+      if (_this.state.inChooseEmoji) {
+        _this.__triggerEmojiPanel();
+        e.preventDefault();
+      }
+    });
+    DomEvent.on(this.inputEle, 'focus', function () {
+      _this.__emit('focus');
+    });
+    DomEvent.on(this.inputEle, 'compositionstart', function () {
+      _this.__isComposition = true;
+    });
+    DomEvent.on(this.inputEle, 'compositionend', function () {
+      _this.__isComposition = false;
+      _this.__emit('input', {
+        data: _this.getContent(),
+        inputType: 'setContent'
+      });
+    });
+    DomEvent.on(this.inputEle, 'blur', function () {
+      if (mmversion.isIOS && !_this.state.inChooseEmoji) {
+        console.log('hide[input blur]');
+        Log.info('hide[input blur]');
+        _this.hide();
+      }
+      _this.__emit('blur');
+    });
+    DomEvent.on(this.inputEle, 'input', function (e) {
+      _this.__emit('input', {
+        data: e.target.value,
+        inputType: 'inputContent'
+      });
+    });
+    DomEvent.on(submitBtn, mmversion.isIOS ? 'tap' : 'click', function (e) {
+      _this.__onSend();
+      e.preventDefault();
+    });
+    DomEvent.on(emotionBtn, mmversion.isIOS ? 'tap' : 'click', function (e) {
+      _this.__triggerEmojiPanel();
+      e.preventDefault();
+    });
+    window.addEventListener('resize', function () {
+      return _this.__onResize();
+    });
+    window.addEventListener('orientationchange', function () {
+      if (_this.state.show && _this.state.show !== 'showing') {
+        console.log('hide[orientationchange]');
+        Log.info('hide[orientationchange]');
+        _this.hide();
+      }
+    });
+    if (mmversion.isIOS) {
+
+      window.addEventListener('scroll', function () {
+        if (_this.state.show && _this.state.show !== 'showing') {
+          console.log('hide[scroll]');
+          Log.info('hide[scroll]');
+          _this.hide();
+        }
+      });
+    }
+    this.__bindAppEvent();
+  };
+
+  BottomInputBar.prototype.__bindAppEvent = function () {
+    var _this2 = this;
+
+    if (mmversion.isIOS) {
+
+      JSAPI.on('onGetKeyboardHeight', function (res) {
+        if (!res.height || _this2.$inputWrapper.css('transform') === 'none') return;
+        clearTimeout(_this2.__failToShowChecker);
+        getRealHeightOfIOSNativePanel(res.height, function (keyboardRealHeight) {
+          _this2.state.keyboardHeight = keyboardRealHeight;
+          if (_this2.state.show) {
+            _this2.state.show = true;
+            var transform = '';
+            if (_this2.showEmotionFirst) {
+              _this2.showEmotionFirst = false;
+              transform = 'translate3d(0, ' + (keyboardRealHeight - _this2.state.panelHeight) + 'px, 0)';
+            } else {
+              transform = 'translate3d(0, 0, 0)';
+            }
+            _this2.$inputWrapper.css({
+              opacity: 1,
+              transition: '',
+              bottom: keyboardRealHeight,
+              transform: transform
+            });
+          }
+        });
+      });
+
+      JSAPI.on('onGetSmiley', function (res) {
+        if (res.smiley === '[DELETE_EMOTION]') {
+          _this2.delContent();
+          return;
+        }
+        if (res.smiley === '[DONE_EMOTION]') {
+          console.log('hide[onGetSmiley]');
+          Log.info('hide[onGetSmiley]');
+          _this2.hide('DONE_EMOTION');
+          return;
+        }
+        var text = getEmojiText(res.smiley);
+        if (text) {
+          _this2.insertContent(text);
+        }
+      });
+    }
+  };
+
+  BottomInputBar.prototype.__emit = function (event) {
+    if (typeof event !== 'string') {
+      console.error('[bottomInputBar] event must be a string');
+      return;
+    }
+
+    if (event === 'input') {
+      this.__onInput();
+    }
+
+    if (typeof this.state.listener[event] === 'function') {
+      var _state$listener;
+
+      for (var _len = arguments.length, params = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        params[_key - 1] = arguments[_key];
+      }
+
+      (_state$listener = this.state.listener)[event].apply(_state$listener, params);
+    }
+  };
+
+  BottomInputBar.prototype.__onSend = function () {
+
+    var value = this.__filterContent(this.getContent());
+    value = value.replace(/\n/g, ' ');
+
+    this.__emit('submit', value);
+
+    console.log('hide[submit]');
+    Log.info('hide[submit]');
+    this.hide();
+    this.clear();
+  };
+
+  BottomInputBar.prototype.__onResize = function () {
+    if (this.state.androidTriggeringEmoji) {
+
+      this.state.androidTriggeringEmoji = false;
+      this.state.keyboardHeight = Math.max(window.innerHeight - this.state.keyboardHeight, 0);
+      this.$el.find('.js_bottom_input_emoji_panel').css({
+        height: this.state.keyboardHeight
+      });
+      this.$inputWrapper.css({
+        opacity: 1,
+        bottom: this.state.keyboardHeight
+      });
+    } else if (this.state.androidShowingKeybroad) {
+
+      clearTimeout(this.__failToShowChecker);
+      var offset = this.state.androidInLandscape ? androidNavigationBarHeight * 1.5 : 0;
+      var index = getAndroidInnerHeightIndex(this.state.androidInFullscreen, this.state.androidInLandscape);
+      console.error('show keyboard', index, window.innerHeight, this.state.androidMinWinInnerHeight);
+      if (this.state.androidMinWinInnerHeight[index] > window.innerHeight) {
+        if ((index === 0 || index === 1) && window.innerHeight > 200 || index === 2) {
+          this.state.androidMinWinInnerHeight[index] = window.innerHeight;
+        }
+      }
+      this.$inputWrapper.css({
+        opacity: 1,
+        left: offset,
+        right: offset,
+        bottom: window.innerHeight - this.state.androidMinWinInnerHeight[index]
+      });
+      this.state.show = true;
+      this.state.androidShowingKeybroad = false;
+      this.__emit('show');
+    } else if (mmversion.isIOS) {
+
+      console.log('hide[resize]');
+      Log.info('hide[resize]');
+      this.hide();
+    } else if (this.state.show) {
+      var index = getAndroidInnerHeightIndex(this.state.androidInFullscreen, this.state.androidInLandscape);
+
+      if (window.innerHeight > this.state.androidOriWinInnerHeight[index] - 10) {
+        console.log('hide[resize]');
+        Log.info('hide[resize]');
+        this.hide();
+      } else {
+        console.error('show resize', index, window.innerHeight, this.state.androidMinWinInnerHeight);
+        if (this.state.androidMinWinInnerHeight[index] > window.innerHeight) {
+          if ((index === 0 || index === 1) && window.innerHeight > 200 || index === 2) {
+            this.state.androidMinWinInnerHeight[index] = window.innerHeight;
+          }
+        }
+        this.$inputWrapper.css({
+          bottom: window.innerHeight - this.state.androidMinWinInnerHeight[index]
+        });
+      }
+    }
+  };
+
+  BottomInputBar.prototype.__triggerEmojiPanel = function () {
+    var _this3 = this;
+
+    this.state.inChooseEmoji = !this.state.inChooseEmoji;
+    if (mmversion.isIOS) {
+      if (this.state.inChooseEmoji) {
+        this.$el.find('.js_bottom_input_emoji').removeClass('comment__push__emoji').addClass('comment__push__keyboard');
+        this.inputEle.blur();
+        JSAPI.invoke('showSmileyPanel', {
+          hidden: false,
+          duration: 0.01
+        }, function (res) {
+          getRealHeightOfIOSNativePanel(res.height, function (panelRealHeight) {
+            _this3.state.panelHeight = panelRealHeight;
+            var currentBottom = parseFloat(_this3.$inputWrapper.css('bottom'));
+            var translateY = currentBottom - panelRealHeight;
+            _this3.$inputWrapper.css('transform', 'translate3d(0, ' + translateY + 'px, 0)');
+            _this3.__emit('showEmotionPanel', panelRealHeight);
+          });
+        });
+      } else {
+        this.$el.find('.js_bottom_input_emoji').removeClass('comment__push__keyboard').addClass('comment__push__emoji');
+        JSAPI.invoke('showSmileyPanel', { hidden: true }, function () {});
+
+        var prevBottom = this.$inputWrapper.css('bottom');
+        var prevTranslate = this.$inputWrapper.css('transform');
+        var bottom = (window.innerHeight - this.state.keyboardHeight) / 2 - 1;
+        if (Device.os.getNumVersion() < 13) {
+          this.state.show = 'showing';
+          bottom = (window.innerHeight + this.state.keyboardHeight - this.$inputWrapper.offset().height) / 2;
+        }
+        this.$inputWrapper.css({
+          opacity: 0,
+          transition: 'none',
+          bottom: bottom,
+          transform: 'translate3d(0, 0, 0)'
+        });
+        this.inputEle.focus();
+        this.$inputWrapper.css({
+          bottom: prevBottom,
+          transform: prevTranslate
+        });
+        setTimeout(function () {
+          _this3.$inputWrapper.css({
+            opacity: 1,
+            transition: '',
+            bottom: _this3.state.keyboardHeight,
+            transform: 'translate3d(0, 0, 0)'
+          });
+        });
+
+        this.__emit('hideEmotionPanel');
+      }
+    } else {
+      this.state.androidTriggeringEmoji = true;
+      this.state.keyboardHeight = window.innerHeight;
+      if (this.state.inChooseEmoji) {
+        this.$el.find('.js_bottom_input_emoji').removeClass('comment__push__emoji').addClass('comment__push__keyboard');
+        this.inputEle.blur();
+
+        JSAPI.invoke('handleDeviceInfo', {
+          action: 'hideKeyBoard'
+        }, function () {});
+        setTimeout(function () {
+          var panel = _this3.$el.find('.js_bottom_input_emoji_panel');
+          panel.css('display', '');
+          if (_this3.showEmotionFirst) {
+            _this3.showEmotionFirst = false;
+            var bottom = panel.height();
+            _this3.state.keyboardHeight = window.innerHeight - bottom;
+            _this3.$inputWrapper.css({
+              bottom: bottom
+            });
+          }
+        }, 200);
+      } else {
+        this.$el.find('.js_bottom_input_emoji').removeClass('comment__push__keyboard').addClass('comment__push__emoji');
+        this.$el.find('.js_bottom_input_emoji_panel').css('display', 'none');
+        this.inputEle.focus();
+      }
+    }
+  };
+
+  BottomInputBar.prototype.__onInput = function () {
+    var value = this.__filterContent(this.getContent());
+    if (this.__isComposition) {
+      $('.js_bottom_input_faker').html(value.replace(/\n/g, '<br/>'));
+      return;
+    }
+    this.setInputValue(value);
+  };
+
+  BottomInputBar.prototype.__filterContent = function (content) {
+    var value = content;
+
+    return value;
+  };
+
+  BottomInputBar.prototype.__filterWordsLimit = function (content) {
+    var retContent = content;
+
+    return retContent;
+  };
+
+  BottomInputBar.prototype.addListener = function (event, callback) {
+    if (typeof event !== 'string') {
+      console.error('[BottomInputBar] event must be a string');
+      return;
+    }
+
+    this.state.listener[event] = callback;
+  };
+
+  BottomInputBar.prototype.show = function (toggleEmotion, isFullscreen, isLandscape) {
+    var _this4 = this;
+
+    if (this.state.show) {
+      return;
+    }
+
+    this.$mask.css('display', '');
+
+    this.__failToShowChecker = setTimeout(function () {
+      _this4.hide();
+      _this4.__emit('fail');
+    }, 1000);
+
+    if (mmversion.isIOS) {
+      JSAPI.invoke('handleMPPageAction', {
+        action: 'opInputAccessoryView',
+        show: false
+      }, function () {});
+      var bottom = 0;
+      if (Device.os.getNumVersion() < 13) {
+        if (this.state.keyboardHeight) {
+          bottom = (window.innerHeight + this.state.keyboardHeight - this.$inputWrapper.offset().height) / 2;
+        } else {
+          bottom = window.innerHeight - this.$inputWrapper.offset().height;
+        }
+      }
+      this.$inputWrapper.css({
+        opacity: 0,
+        bottom: bottom,
+        transform: 'translate3d(0, 10px, 1px)'
+      });
+      this.inputEle.focus();
+      this.__emit('show');
+      if (Device.os.getNumVersion() < 13) {
+        this.state.show = 'showing';
+      } else {
+        this.state.show = true;
+      }
+    } else {
+      this.$inputWrapper.css({
+        opacity: 0,
+        bottom: window.innerHeight
+      });
+      var index = getAndroidInnerHeightIndex(isFullscreen, isLandscape);
+      this.state.androidOriWinInnerHeight[index] = window.innerHeight;
+      this.state.androidShowingKeybroad = true;
+      this.state.androidInLandscape = isLandscape;
+      this.state.androidInFullscreen = isFullscreen;
+      toggleEmotion ? this.__onResize() : this.inputEle.focus();
+    }
+
+    var endPos = this.inputEle.value.length;
+    this.inputEle.setSelectionRange(endPos, endPos);
+
+    if (isFullscreen) {
+      this.$el.addClass('comment__push_danmu');
+      this.$el.addClass('comment__push_immersive');
+    }
+    if (isLandscape) {
+      this.$el.addClass('comment__push__container__horizontal');
+    }
+
+    if (toggleEmotion) {
+
+      this.showEmotionFirst = true;
+      this.__triggerEmojiPanel();
+    }
+  };
+
+  BottomInputBar.prototype.hide = function (from) {
+    this.state.androidTriggeringEmoji = false;
+
+    if (!this.state.show) {
+      return;
+    }
+
+    if (this.state.inChooseEmoji) {
+      this.state.inChooseEmoji = false;
+      this.$el.find('.js_bottom_input_emoji').removeClass('comment__push__keyboard').addClass('comment__push__emoji');
+      if (mmversion.isIOS) {
+        JSAPI.invoke('showSmileyPanel', { hidden: true }, function () {});
+      } else {
+        this.$el.find('.js_bottom_input_emoji_panel').css('display', 'none');
+      }
+    }
+    if (mmversion.isIOS) {
+      JSAPI.invoke('handleMPPageAction', {
+        action: 'opInputAccessoryView',
+        show: true
+      }, function () {});
+    } else {
+
+      JSAPI.invoke('handleDeviceInfo', {
+        action: 'hideKeyBoard'
+      }, function () {});
+    }
+
+    this.$inputWrapper.attr('style', 'opacity: 0; bottom: ' + window.innerHeight * 100 + 'px');
+    this.$mask.css('display', 'none');
+    this.state.show = false;
+    this.state.androidShowingKeybroad = false;
+    this.inputEle.blur();
+
+    this.__emit('hide', from);
+
+    this.$el.removeClass('comment__push_danmu');
+    this.$el.removeClass('comment__push_immersive');
+    this.$el.removeClass('comment__push__container__horizontal');
+  };
+
+  BottomInputBar.prototype.clear = function () {
+    this.setInputValue('');
+  };
+
+  BottomInputBar.prototype.getContent = function (start, end) {
+    return this.inputEle.value.substring(start, end);
+  };
+
+  BottomInputBar.prototype.setLimit = function (limit) {
+    this.state.limit = limit;
+    if (this.state.limit !== 0) {
+      this.inputEle.setAttribute('maxlength', this.state.limit);
+    } else {
+      this.inputEle.removeAttribute('maxlength');
+    }
+  };
+
+  BottomInputBar.prototype.setPlaceholder = function (placeholder) {
+    this.opt.placeholder = placeholder;
+    this.inputEle.setAttribute('placeholder', this.__filterContent(this.opt.placeholder));
+  };
+
+  BottomInputBar.prototype.setInputValue = function (value) {
+    this.inputEle.value = value;
+    $('.js_bottom_input_faker').html(value.replace(/\n/g, '<br/>'));
+  };
+
+  BottomInputBar.prototype.setContent = function (content) {
+    var value = this.__filterContent(content);
+    this.setInputValue(value);
+    this.__emit('input', {
+      data: content,
+      inputType: 'setContent'
+    });
+  };
+
+  BottomInputBar.prototype.insertContent = function (content) {
+    var startContent = this.getContent(0, this.inputEle.selectionStart);
+    var endContent = this.getContent(this.inputEle.selectionEnd);
+
+    if (this.state.limit !== 0 && content.length + startContent.length + endContent.length > this.state.limit) {
+      return;
+    }
+
+    var newCursorPos = this.inputEle.selectionStart + content.length;
+    var value = this.__filterContent(startContent + content + endContent);
+    this.setInputValue(value);
+    this.inputEle.setSelectionRange(newCursorPos, newCursorPos);
+    this.__emit('input', {
+      data: content,
+      inputType: 'insertContent'
+    });
+  };
+
+  BottomInputBar.prototype.delContent = function () {
+    var startContent = this.getContent(0, this.inputEle.selectionStart);
+    var endContent = this.getContent(this.inputEle.selectionEnd);
+
+    var value = undefined;
+    var delContent = undefined;
+    var newCursorPos = undefined;
+    if (this.inputEle.selectionStart === this.inputEle.selectionEnd) {
+      for (var i = 0; i < emojiData.length; i++) {
+        var e = emojiData[i];
+        if (e.cn && startContent.endsWith(e.cn)) {
+          value = startContent.substring(0, startContent.length - e.cn.length) + endContent;
+          delContent = startContent.substring(startContent.length - e.cn.length, startContent.length);
+          newCursorPos = this.inputEle.selectionStart - e.cn.length;
+          break;
+        } else if (e.hk && startContent.endsWith(e.hk)) {
+          value = startContent.substring(0, startContent.length - e.hk.length) + endContent;
+          delContent = startContent.substring(startContent.length - e.hk.length, startContent.length);
+          newCursorPos = this.inputEle.selectionStart - e.hk.length;
+          break;
+        } else if (e.us && startContent.endsWith(e.us)) {
+          value = startContent.substring(0, startContent.length - e.us.length) + endContent;
+          delContent = startContent.substring(startContent.length - e.us.length, startContent.length);
+          newCursorPos = this.inputEle.selectionStart - e.us.length;
+          break;
+        } else if (e.emoji && startContent.endsWith(e.emoji)) {
+          value = startContent.substring(0, startContent.length - e.emoji.length) + endContent;
+          delContent = startContent.substring(startContent.length - e.emoji.length, startContent.length);
+          newCursorPos = this.inputEle.selectionStart - e.emoji.length;
+          break;
+        }
+      }
+      if (typeof value !== 'string') {
+        value = startContent.substring(0, startContent.length - 1) + endContent;
+        delContent = startContent[startContent.length - 1];
+        newCursorPos = this.inputEle.selectionStart - 1;
+      }
+    } else {
+      value = startContent + endContent;
+      delContent = this.getContent(this.inputEle.selectionStart, this.inputEle.selectionEnd);
+      newCursorPos = this.inputEle.selectionStart;
+    }
+
+    value = this.__filterContent(value);
+    this.setInputValue(value);
+    this.inputEle.setSelectionRange(newCursorPos, newCursorPos);
+    this.__emit('input', {
+      data: delContent,
+      inputType: 'delContent'
+    });
+  };
+
+  BottomInputBar.prototype.__initEmojiPanel = function () {
+    var _this5 = this;
+
+    var rowCount = 16;
+    var colCount = 7;
+    var emojiDis = 34;
+
+    var edata = [];
+    var emojiText = {};
+
+    var data = [];
+    for (var i = 0; i < panelData.length; i++) {
+      for (var j = 0; j < emojiData.length; j++) {
+        if (emojiData[j].id === panelData[i]) {
+          data[i] = emojiData[j];
+          break;
+        }
+      }
+    }
+
+    for (var i = 0; i < colCount; i++) {
+      for (var j = 0; j < rowCount; j++) {
+        var k = i * rowCount + j;
+        if (data[k]) {
+          edata.push({
+            name: data[k].style,
+            title: data[k].emoji ? data[k].emoji : data[k].cn,
+            bp: 'background-position: 0 -' + k * emojiDis + 'px;',
+            id: data[k].id
+          });
+        }
+      }
+    }
+
+    for (var i = 0; i < data.length; i++) {
+      emojiText[data[i].style] = data[i].emoji || data[i].cn;
+    }
+
+    var fragment = document.createDocumentFragment();
+    edata.forEach(function (emoji, index) {
+      var li = document.createElement('li');
+      var span = document.createElement('span');
+      li.className = 'comment_primary_emotion_item js_emotion_item';
+      li.setAttribute('data-index', index);
+      span.className = 'comment_primary_emotion';
+      span.setAttribute('style', emoji.bp);
+      span.setAttribute('text-name', emoji.name);
+      span.setAttribute('role', 'button');
+      span.setAttribute('title', emoji.title);
+      li.appendChild(span);
+
+      fragment.appendChild(li);
+    });
+
+    this.$el.append('<div class="js_bottom_input_emoji_panel comment__emoji__panel" style="display: none;"></div>');
+    this.$el.find('.js_bottom_input_emoji_panel').append(fragment);
+
+    var sY = undefined;
+    DomEvent.on(this.$el.find('.js_bottom_input_emoji_panel')[0], 'touchstart', function (e) {
+      sY = e.changedTouches[0].clientY;
+    });
+    DomEvent.on(this.$el.find('.js_bottom_input_emoji_panel')[0], 'touchmove', function (e) {
+      var cY = e.changedTouches[0].clientY;
+      var sT = _this5.$el.find('.js_bottom_input_emoji_panel')[0].scrollTop;
+      var sH = _this5.$el.find('.js_bottom_input_emoji_panel')[0].scrollHeight;
+      var cH = _this5.$el.find('.js_bottom_input_emoji_panel')[0].clientHeight;
+      if (sT < 0.5 && cY > sY || sH - sT - cH < 0.5 && cY < sY) {
+        e.preventDefault();
+      }
+    });
+
+    DomEvent.on(this.$el.find('.js_bottom_input_emoji_panel')[0], 'click', function (e) {
+      if (e.target.className === 'comment_primary_emotion') {
+        var text = emojiText[e.target.getAttribute('text-name')];
+        if (text) {
+          _this5.insertContent(text);
+        }
+      }
+    });
+  };
+
+  return BottomInputBar;
+});
+define("a/appdialog_confirm.html.js",[],function(){
+return'<div class="wx_profile_dialog_primary">\n    <div class="weui-mask"></div>\n    <div class="weui-dialog weui-skin_android">\n        <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否立即下载该应用</strong></div>\n        <div class="weui-dialog__bd">\n            <div class="weui-flex">\n                <div class="wx_profile_info_avatar_wrp">\n                    <span class="wx_profile_info_avatar">\n                        <img src="<#=app_img_url#>" alt="">\n                    </span>\n                </div>\n                <div class="weui-flex__item">\n                    <strong class="wx_profile_info_title"><#=app_name#></strong>\n                </div>\n            </div>\n        </div>\n        <div class="weui-dialog__ft">\n            <a href="javascript:;" class="js_cancel weui-dialog__btn weui-dialog__btn_default">取消</a>\n            <a href="javascript:;" class="js_ok weui-dialog__btn weui-dialog__btn_primary">下载</a>\n        </div>\n    </div>\n</div>\n';
+});;define('widget/wx_profile_dialog_primary.css', [], function(require, exports, module) {
+	return ".radius_avatar{display:inline-block;background-color:#fff;padding:3px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;overflow:hidden;vertical-align:middle}.radius_avatar img{display:block;width:100%;height:100%;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;background-color:#eee}.wx_profile_dialog_primary .weui-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;background:rgba(0,0,0,0.6)}.wx_profile_dialog_primary .weui-dialog{position:fixed;z-index:5000;width:80%;max-width:300px;top:50%;left:50%;-webkit-transform:translate(-50%,-65%);transform:translate(-50%,-65%);background-color:#fff;text-align:center;border-radius:3px;overflow:hidden}.wx_profile_dialog_primary .weui-dialog__hd{position:relative;padding:20px 20px 10px;text-align:left}.wx_profile_dialog_primary .weui-dialog__hd:after{content:\" \";position:absolute;left:20px;right:20px;bottom:0;height:1px;border-bottom:1px solid #d5d5d6;color:#d5d5d6;-webkit-transform-origin:0 100%;transform-origin:0 100%;-webkit-transform:scaleY(0.5);transform:scaleY(0.5)}.wx_profile_dialog_primary .weui-dialog__title{font-weight:400;font-size:17px}.wx_profile_dialog_primary .weui-dialog__bd{padding:16px 20px;min-height:40px;font-size:15px;line-height:1.3;word-wrap:break-word;-webkit-hyphens:auto;-ms-hyphens:auto;hyphens:auto;color:#999}.wx_profile_dialog_primary .weui-dialog__bd:first-child{padding:2.7em 20px 1.7em;color:#353535}.wx_profile_dialog_primary .weui-dialog__ft{position:relative;line-height:44px;font-size:17px;display:-webkit-box;display:-webkit-flex;display:flex}.wx_profile_dialog_primary .weui-dialog__ft:after{content:\" \";position:absolute;left:0;top:0;right:0;height:1px;border-top:1px solid #d5d5d6;color:#d5d5d6;-webkit-transform-origin:0 0;transform-origin:0 0;-webkit-transform:scaleY(0.5);transform:scaleY(0.5)}.wx_profile_dialog_primary .weui-dialog__btn{display:block;-webkit-box-flex:1;-webkit-flex:1;flex:1;color:#3cc51f;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);position:relative}.wx_profile_dialog_primary .weui-dialog__btn:active{background-color:#eee}.wx_profile_dialog_primary .weui-dialog__btn:after{content:\" \";position:absolute;left:0;top:0;width:1px;bottom:0;border-left:1px solid #d5d5d6;color:#d5d5d6;-webkit-transform-origin:0 0;transform-origin:0 0;-webkit-transform:scaleX(0.5);transform:scaleX(0.5)}.wx_profile_dialog_primary .weui-dialog__btn:first-child:after{display:none}.wx_profile_dialog_primary .weui-dialog__btn_default{color:#353535}.wx_profile_dialog_primary .weui-dialog__btn_primary{color:#1aad19}.wx_profile_dialog_primary .weui-skin_android .weui-dialog{text-align:left;box-shadow:0 6px 30px 0 rgba(0,0,0,0.1)}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__title{font-size:21px}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__hd{text-align:left;padding:1.3em 1.6em 1.2em}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__hd:after{display:none}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__bd{color:#999;padding:0 1.6em 1.4em;font-size:17px;text-align:left}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__bd:first-child{padding:1.6em 1.6em 2em;color:#353535}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__ft{display:block;text-align:right;line-height:42px;font-size:16px;padding:0 1.6em .7em}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__ft:after{display:none}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__btn{display:inline-block;vertical-align:top;padding:0 .8em}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__btn:after{display:none}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__btn:active{background-color:rgba(0,0,0,0.06)}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__btn:visited{background-color:rgba(0,0,0,0.06)}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__btn:last-child{margin-right:-0.8em}.wx_profile_dialog_primary .weui-skin_android .weui-dialog__btn_default{color:#808080}@media screen and (min-width:1024px){.wx_profile_dialog_primary .weui-dialog{width:35%}}.wx_profile_dialog_primary .weui-flex{display:-webkit-box;display:-webkit-flex;display:flex}.wx_profile_dialog_primary .weui-flex__item{-webkit-box-flex:1;-webkit-flex:1;flex:1}.wx_profile_dialog_primary .weui-flex{-webkit-box-align:center;-webkit-align-items:center;align-items:center}.wx_profile_dialog_primary .weui-flex__item{word-wrap:break-word;-webkit-hyphens:auto;-ms-hyphens:auto;hyphens:auto}.wx_profile_info_avatar_wrp{padding-right:10px}.wx_profile_info_avatar{width:50px;height:50px;padding:0;display:inline-block;background-color:#fff;vertical-align:middle}.wx_profile_info_avatar img{display:block;width:100%;border-radius:10px}.wx_profile_info_title{display:block;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:16px;font-weight:400;text-align:left}";
+});
